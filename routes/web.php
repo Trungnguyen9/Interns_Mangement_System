@@ -2,19 +2,12 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group([
-    'prefix' => 'admin'
-    ], function () {
-    // Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
-});
-
-
+Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
