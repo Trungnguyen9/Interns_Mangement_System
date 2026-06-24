@@ -5,9 +5,16 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/admin/dashboard') }}" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/adminpage') }}" aria-expanded="false">
                         <i class="mdi mdi-av-timer"></i>
                         <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/adminpage/account') }}" aria-expanded="false">
+                        <i class="mdi mdi-account-multiple"></i>
+                        <span class="hide-menu">Account & Roles</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -20,12 +27,6 @@
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="form-basic.html" aria-expanded="false">
                         <i class="mdi mdi-arrange-bring-forward"></i>
                         <span class="hide-menu">Form Basic</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/admin/list') }}" aria-expanded="false">
-                        <i class="mdi mdi-border-none"></i>
-                        <span class="hide-menu">Country</span>
                     </a>
                 </li>
                 <li class="sidebar-item">

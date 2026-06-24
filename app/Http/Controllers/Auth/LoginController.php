@@ -32,10 +32,10 @@ class LoginController extends Controller
             return redirect()->route('admin.index');
         }
 
-        if ($user->id_role == '2') {
-            return redirect()->route('/home');
+        if ($user->id_role == '3') {
+            return redirect()->route('home');
         }
-        // if ($user->id_role == '3') {
+        // if ($user->id_role == '2') {
         //     return redirect()->route('');
         // }
     }
