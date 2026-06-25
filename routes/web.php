@@ -26,4 +26,6 @@ Route::prefix('adminpage')
         Route::post('/account/edit/{id}', [AccountController::class, 'update']);
             // delete
         Route::delete('/account/{id}', [AccountController::class, 'destroy'])->name('admin.account.destroy');
+
+        //
     });

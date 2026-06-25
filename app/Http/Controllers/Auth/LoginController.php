@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -28,6 +29,15 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
+        if ($user->status == 'inactive') {
+
+            Auth::logout();
+
+            return redirect()
+                ->route('login')
+                ->with('error', 'Tài khoản của bạn đã bị vô hiệu hóa');
+        }
+
         if ($user->id_role == '1') {
             return redirect()->route('admin.index');
         }

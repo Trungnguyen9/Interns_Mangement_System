@@ -17,21 +17,24 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@example.com',
             'password' => 'password',
-            'id_role' => 1
+            'id_role' => 1,
+            'status' => 'active'
         ]);
 
         User::factory()->create([
             'name' => 'mentor',
             'email' => 'mentor@example.com',
             'password' => 'password',
-            'id_role' => 2
+            'id_role' => 2,
+            'status' => 'active'
         ]);
 
         User::factory()->create([
             'name' => 'intern',
             'email' => 'intern@example.com',
             'password' => 'password',
-            'id_role' => 3
+            'id_role' => 3,
+            'status' => 'active'
         ]);
     }
 }
