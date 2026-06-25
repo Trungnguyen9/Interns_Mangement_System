@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -28,16 +29,24 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if ($user->id_role == '1') {
-            return redirect()->route('admin.index');
+        if ($user->status == 'inactive') {
+
+            Auth::logout();
+
+            return redirect()
+                ->route('login')
+                ->with('error', 'Tài khoản của bạn đã bị vô hiệu hóa');
         }
 
-        if ($user->id_role == '3') {
-            return redirect()->route('home');
+        if ($user->id_role == '1') {
+            return redirect()->route('admin.index')->with('success', 'Đăng nhập trang quản trị thành công');;
         }
-        // if ($user->id_role == '2') {
-        //     return redirect()->route('');
-        // }
+        if ($user->id_role == '2') {
+            return redirect()->route('home')->with('success', 'Đăng nhập trang người dùng thành công');
+        }
+        if ($user->id_role == '3') {
+            return redirect()->route('home')->with('success', 'Đăng nhập trang thực tập sinh thành công');
+        }
     }
     /**
      * Create a new controller instance.

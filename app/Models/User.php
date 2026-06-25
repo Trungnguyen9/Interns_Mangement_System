@@ -23,8 +23,37 @@ class User extends Authenticatable
         'email',
         'password',
         'id_role',
+        'status',
     ];
 
+    // User thuộc Role
+    public function role()
+    {
+        return $this->belongsTo(
+            Role::class,
+            'id_role'
+        );
+    }
+
+
+    // User có 1 intern profile
+    public function internProfile()
+    {
+        return $this->hasOne(
+            Intern_profiles::class,
+            'user_id'
+        );
+    }
+
+
+    // User có 1 mentor profile
+    public function mentorProfile()
+    {
+        return $this->hasOne(
+            Mentor_profiles::class,
+            'user_id'
+        );
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->date('deadline')->nullable();
             $table->string('priority')->default('Medium');
             $table->enum('status', ['Todo', 'Doing', 'Review', 'Done'])->default('Todo'); 
-            $table->foreignId('mentor_profile_id')->constrained('mentor_profiles')->onDelete('cascade'); 
-            $table->foreignId('intern_profile_id')->constrained('intern_profiles')->onDelete('cascade'); 
+            $table->foreignId('mentor_id')->constrained('mentor_profiles')->onDelete('cascade'); 
+            $table->foreignId('intern_id')->constrained('intern_profiles')->onDelete('cascade'); 
             $table->text('mentor_comment')->nullable();
             $table->timestamps();
         });

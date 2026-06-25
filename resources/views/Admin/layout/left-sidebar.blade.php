@@ -18,9 +18,9 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/admin/profile') }}" aria-expanded="false">
-                        <i class="mdi mdi-account-network"></i>
-                        <span class="hide-menu">Profile</span>
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/adminpage/intern') }}" aria-expanded="false">
+                        <i class="mdi mdi-border-none"></i>
+                        <span class="hide-menu">Interns Management</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
