@@ -18,4 +18,12 @@ class Weekly_report extends Model
         'reference_links',
         'mentor_comment',
     ];
+
+    public function intern()
+    {
+        return $this->belongsTo(
+            Intern_profiles::class,
+            'intern_id'
+        );
+    }
 }

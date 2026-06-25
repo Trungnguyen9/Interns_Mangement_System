@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Intern_porfiles;
+use App\Models\Intern_profiles;
 use App\Models\Mentor_profiles;
 use App\Models\Task;
 use App\Models\User;
@@ -23,7 +23,7 @@ class TaskSeeder extends Seeder
             $mentor = Mentor_profiles::firstWhere('user_id', $mentorUser->id);
         }
 
-        $interns = Intern_porfiles::all();
+        $interns = Intern_profiles::all();
 
         if (! $mentor || $interns->isEmpty()) {
             return;

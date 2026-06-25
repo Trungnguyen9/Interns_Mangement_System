@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Intern_porfiles;
+use App\Models\Intern_profiles;
 use App\Models\Mentor_profiles;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -23,12 +23,13 @@ class MentorAndInternSeeder extends Seeder
 
         $mentor = Mentor_profiles::create([
             'user_id' => $mentorUser->id,
+            'full_name' => 'Nguyễn Văn B',
             'department' => 'Software Development',
             'position' => 'Senior Mentor',
             'max_interns' => 3,
         ]);
 
-        Intern_porfiles::create([
+        Intern_profiles::create([
             'user_id' => $internUser1->id,
             'full_name' => 'Nguyễn Văn A',
             'school' => 'Đại học Bách Khoa',

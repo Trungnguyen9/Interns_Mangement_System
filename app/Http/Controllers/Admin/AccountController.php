@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\user;
 use App\Models\Role;
@@ -79,6 +80,7 @@ class AccountController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'id_role' => 'required|exists:roles,id',
+            'status' => 'required|in:active,inactive',
         ]);
 
         $user = User::findOrFail($id);
@@ -86,6 +88,7 @@ class AccountController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'id_role' => $request->input('id_role'),
+            'status' => $request->input('status'), 
         ]);
 
         return redirect('/adminpage/account')->with('success', 'Account updated successfully.');

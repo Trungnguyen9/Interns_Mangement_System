@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Intern_porfiles;
+use App\Models\Intern_profiles;
 use App\Models\Weekly_report;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -14,7 +14,7 @@ class WeeklyReportSeeder extends Seeder
      */
     public function run(): void
     {
-        $interns = Intern_porfiles::all();
+        $interns = Intern_profiles::all();
         if ($interns->isEmpty()) {
             return;
         }

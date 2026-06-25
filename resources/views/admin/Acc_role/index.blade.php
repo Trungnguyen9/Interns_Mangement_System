@@ -58,6 +58,7 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->id_role }}</td>
+                                        <td>{{ $user->status }}</td>
                                         <td>
                                             <a href="{{ route('admin.account.edit', $user->id) }}"
                                                 class="btn btn-primary"><i class="fa-solid fa-edit"></i> Edit</a>

@@ -6,7 +6,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Accounts & Roles</h4>
+                <h4 class="page-title">Interns Management</h4>
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
@@ -15,7 +15,7 @@
                             <li class="breadcrumb-item">
                                 <a href="#">Home</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Accounts & Roles</li>
+                            <li class="breadcrumb-item active" aria-current="page">Interns Management</li>
                         </ol>
                     </nav>
                 </div>
@@ -36,32 +36,36 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Accounts</h4>
+                        <h4 class="card-title">Interns</h4>
                         <h6 class="card-subtitle">Admin: 1; Mentor: 2; Intern: 3</h6>
-                        <a href="{{ route('admin.account.add') }}" class="btn btn-success">Add New</a>
+                        <a href="{{ route('admin.intern.create') }}" class="btn btn-success">Add New</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Name</th>
+                                    <th scope="col">Full Name</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Role</th>
+                                    <th scope="col">Mentor</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $user)
-                                    <tr>
-                                        <th scope="row">{{ $user->id }}</th>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->id_role }}</td>
+                                @foreach ($data as $intern)
+                                    @if ($intern->role->id == '3')
+                                        <tr>
+                                        <th scope="row">{{ $intern->id }}</th>
+                                        <td>{{ $intern->internProfile->full_name ?? 'N/A' }}</td>
+                                        <td>{{ $intern->email }}</td>
+                                        <td>{{ $intern->mentorProfile->full_name ?? 'N/A' }}</td>
+                                        <td>{{ $intern->status }}</td>
                                         <td>
-                                            <a href="{{ route('admin.account.edit', $user->id) }}"
+                                            <a href="{{ route('admin.intern.edit', $intern->id) }}"
                                                 class="btn btn-primary"><i class="fa-solid fa-edit"></i> Edit</a>
-                                            <form action="{{ route('admin.account.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                            <form action="{{ route('admin.intern.destroy', $intern->id) }}" method="POST"
+                                                style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">
@@ -70,6 +74,7 @@
                                             </form>
                                         </td>
                                     </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

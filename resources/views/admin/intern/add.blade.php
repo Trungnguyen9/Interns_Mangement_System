@@ -6,7 +6,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-5 align-self-center">
-            <h4 class="page-title">Edit Account</h4>
+            <h4 class="page-title">Add Account</h4>
         </div>
         <div class="col-7 align-self-center">
             <div class="d-flex align-items-center justify-content-end">
@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item">
                             <a href="#">Home</a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit Account</li>
+                        <li class="breadcrumb-item active" aria-current="page">Add Account</li>
                     </ol>
                 </nav>
             </div>
@@ -44,18 +44,30 @@
                 </div>
                 @endif
                 <div class="card-body">
-                    <form id="accountForm" class="form-horizontal form-material" method="post">
+                    <form class="form-horizontal form-material" method="post">
                         @csrf
                         <div class="form-group">
                             <label class="col-md-12">Name Account</label>
                             <div class="col-md-12">
-                                <input type="text" name="name" placeholder="Name account" class="form-control form-control-line" value="{{ $data->name }}">
+                                <input type="text" name="name" placeholder="Name account" class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Email</label>
                             <div class="col-md-12">
-                                <input type="email" name="email" placeholder="Email" class="form-control form-control-line" value="{{ $data->email }}">
+                                <input type="email" name="email" placeholder="Email" class="form-control form-control-line">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Password</label>
+                            <div class="col-md-12">
+                                <input type="password" name="password" placeholder="Password" class="form-control form-control-line">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Confirm Password</label>
+                            <div class="col-md-12">
+                                <input type="password" name="password_confirmation" placeholder="Confirm Password" class="form-control form-control-line">
                             </div>
                         </div>
                         <div class="form-group">
@@ -64,25 +76,14 @@
                                 <select name="id_role" class="form-control form-control-line">
                                     <option value="">Select Role</option>
                                     @foreach($roles as $role)
-                                        <option value="{{ $role->id }}" {{ $data->id_role == $role->id ? 'selected' : '' }}>
-                                            {{ $role->name }}
-                                        </option>
+                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-12">Status</label>
-                            <div class="col-md-12">
-                                <select name="status" class="form-control form-control-line">
-                                    <option value="active" {{ $data->status == 'active' ? 'selected' : '' }}>Active</option>
-                                    <option value="inactive" {{ $data->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <div class="col-sm-12">
-                                <button type="submit" class="btn btn-success">Update Account</button>
+                                <button type="submit" class="btn btn-success">New Account</button>
                             </div>
                         </div>
                     </form>
@@ -94,7 +95,7 @@
 <!-- ============================================================== -->
 <!-- End Container fluid  -->
 <!-- ============================================================== -->
-    <!-- ============================================================== -->
+<!-- ============================================================== -->
 <!-- footer -->
 <!-- ============================================================== -->
 <footer class="footer text-center">
