@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\user;
 use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -27,7 +28,7 @@ class AccountController extends Controller
      */
     public function create()
     {
-        $roles= Role::all();
+        $roles = Role::all();
         return view('admin.Acc_role.add', compact('roles'));
     }
 
@@ -46,7 +47,8 @@ class AccountController extends Controller
         User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
+            'password' => Hash::make($request->password),
+
             'id_role' => $request->input('id_role'),
         ]);
 
@@ -87,8 +89,9 @@ class AccountController extends Controller
         $user->update([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
             'id_role' => $request->input('id_role'),
-            'status' => $request->input('status'), 
+            'status' => $request->input('status'),
         ]);
 
         return redirect('/adminpage/account')->with('success', 'Account updated successfully.');

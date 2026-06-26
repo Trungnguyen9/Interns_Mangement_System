@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('intern_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); 
-            $table->string('full_name');
+            $table->string('full_name')->nullable();
             $table->string('school')->nullable();
             $table->string('academic_year')->nullable();
             $table->string('desired_technology')->nullable();

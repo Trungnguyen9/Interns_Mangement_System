@@ -3,6 +3,11 @@
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
