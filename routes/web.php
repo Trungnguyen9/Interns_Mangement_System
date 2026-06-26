@@ -37,6 +37,8 @@ Route::prefix('adminpage')
         // edit
         Route::get('/intern/edit/{id}', [InternManagementController::class, 'edit'])->name('admin.intern.edit');
         Route::post('/intern/edit/{id}', [InternManagementController::class, 'update']);
+        // show
+        Route::get('/intern/show/{id}', [InternManagementController::class, 'show'])->name('admin.intern.show');
         // delete
         Route::delete('/intern/{id}', [InternManagementController::class, 'destroy'])->name('admin.intern.destroy');
     });

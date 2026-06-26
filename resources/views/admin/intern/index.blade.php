@@ -3,6 +3,11 @@
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
@@ -37,7 +42,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Interns</h4>
-                        <h6 class="card-subtitle">Admin: 1; Mentor: 2; Intern: 3</h6>
+                        {{-- <h6 class="card-subtitle">Admin: 1; Mentor: 2; Intern: 3</h6> --}}
                         <a href="{{ route('admin.intern.create') }}" class="btn btn-success">Add New</a>
                     </div>
                     <div class="table-responsive">
@@ -56,24 +61,26 @@
                                 @foreach ($data as $intern)
                                     @if ($intern->role->id == '3')
                                         <tr>
-                                        <th scope="row">{{ $intern->id }}</th>
-                                        <td>{{ $intern->internProfile->full_name ?? 'N/A' }}</td>
-                                        <td>{{ $intern->email }}</td>
-                                        <td>{{ $intern->mentorProfile->full_name ?? 'N/A' }}</td>
-                                        <td>{{ $intern->status }}</td>
-                                        <td>
-                                            <a href="{{ route('admin.intern.edit', $intern->id) }}"
-                                                class="btn btn-primary"><i class="fa-solid fa-edit"></i> Edit</a>
-                                            <form action="{{ route('admin.intern.destroy', $intern->id) }}" method="POST"
-                                                style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">
-                                                    <i class="fa-solid fa-trash"></i> Delete
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                            <th scope="row">{{ $intern->id }}</th>
+                                            <td>{{ $intern->internProfile->full_name ?? 'N/A' }}</td>
+                                            <td>{{ $intern->email }}</td>
+                                            <td>{{ $intern->mentorProfile->full_name ?? 'N/A' }}</td>
+                                            <td>{{ $intern->status }}</td>
+                                            <td>
+                                                <a href="{{ route('admin.intern.edit', $intern->id) }}"
+                                                    class="btn btn-primary"><i class="fa-solid fa-edit"></i> Edit</a>
+                                                <form action="{{ route('admin.intern.destroy', $intern->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="fa-solid fa-trash"></i> Delete
+                                                    </button>
+                                                </form>
+                                                <a href="{{ route('admin.intern.show', $intern->id) }}"
+                                                    class="btn btn-info"><i class="fa-solid fa-eye"></i> Details</a>
+                                            </td>
+                                        </tr>
                                     @endif
                                 @endforeach
                             </tbody>

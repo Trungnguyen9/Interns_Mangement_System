@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\addInternRequest;
+use App\Models\Intern_profiles;
+use App\Models\Mentor_profiles;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class InternManagementController extends Controller
 {
@@ -22,15 +29,82 @@ class InternManagementController extends Controller
      */
     public function create()
     {
-        //
+        $mentors = Mentor_profiles::all();
+        return view('admin.intern.add', compact('mentors'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(addInternRequest $request)
     {
-        //
+        DB::beginTransaction();
+
+
+        try {
+
+
+            // 1. Tạo user trước
+
+            $user = User::create([
+
+                'name' => $request->name,
+
+                'email' => $request->email,
+
+                'password' => Hash::make($request->password),
+
+                'id_role' => 3,
+
+                'status' => 'active'
+
+            ]);
+
+
+
+            // 2. Tạo intern profile
+
+            Intern_profiles::create([
+
+                'user_id' => $user->id,
+
+                'full_name' => $request->full_name,
+
+                'school' => $request->school,
+
+                'academic_year' => $request->academic_year,
+
+                'desired_technology' => $request->desired_technology,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+
+                'mentor_id' => $request->mentor_id,
+
+                'status' => $request->status
+
+            ]);
+
+
+
+            DB::commit();
+
+
+
+            return redirect('adminpage/intern')
+                ->with(
+                    'success',
+                    'Thêm intern thành công'
+                );
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            // Ghi lại lỗi vào file log (storage/logs/laravel.log) để tiện mở lên xem khi code bị lỗi
+            Log::error('Lỗi khi thêm Intern: ' . $e->getMessage());
+
+            return back()
+                ->withInput()
+                ->with('error', 'Có lỗi xảy ra trong quá trình xử lý. Vui lòng thử lại.');
+        }
     }
 
     /**
@@ -38,7 +112,8 @@ class InternManagementController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $intern = Intern_profiles::with('user', 'mentor', 'tasks', 'weeklyReports')->findOrFail($id);
+        return view('admin.intern.show', compact('intern'));
     }
 
     /**
