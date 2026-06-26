@@ -143,6 +143,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
+                                    <a href="{{ route('admin.intern.index') }}" class="btn btn-secondary">Back</a>
+                               
                                     <button type="submit" class="btn btn-success">New Intern</button>
                                 </div>
                             </div>

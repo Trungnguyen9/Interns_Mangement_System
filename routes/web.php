@@ -19,7 +19,7 @@ Route::prefix('adminpage')
         Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
 
         // Accounts & Roles
-        Route::get('/account', [AccountController::class, 'index']);
+        Route::get('/account', [AccountController::class, 'index'])->name('admin.account.index');
         // add
         Route::get('/account/create', [AccountController::class, 'create'])->name('admin.account.add');
         Route::post('/account/create', [AccountController::class, 'store']);
