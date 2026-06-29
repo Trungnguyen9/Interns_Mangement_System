@@ -11,7 +11,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Interns Management</h4>
+                <h4 class="page-title">Mentors Management</h4>
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
@@ -20,7 +20,7 @@
                             <li class="breadcrumb-item">
                                 <a href="#">Home</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Interns Management</li>
+                            <li class="breadcrumb-item active" aria-current="page">Mentors Management</li>
                         </ol>
                     </nav>
                 </div>
@@ -41,9 +41,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Interns</h4>
+                        <h4 class="card-title">Mentors</h4>
                         {{-- <h6 class="card-subtitle">Admin: 1; Mentor: 2; Intern: 3</h6> --}}
-                        <a href="{{ route('admin.intern.create') }}" class="btn btn-success">Add New</a>
+                        <a href="{{ route('admin.mentor.create') }}" class="btn btn-success">Add New</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -52,31 +52,33 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Full Name</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Mentor</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Department</th>
+                                    <th scope="col">Position</th>
+                                    <th scope="col">Max Interns</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $intern)
+                                @foreach ($data as $mentor)
                                     <tr>
-                                        <th scope="row">{{ $intern->id }}</th>
-                                        <td>{{ $intern->full_name ?? 'N/A' }}</td>
-                                        <td>{{ $intern->user->email }}</td>
-                                        <td>{{ $intern->mentor->user->name ?? 'N/A' }}</td>
-                                        <td>{{ $intern->status }}</td>
+                                        <th scope="row">{{ $mentor->id }}</th>
+                                        <td>{{ $mentor->full_name ?? 'N/A' }}</td>
+                                        <td>{{ $mentor->user->email }}</td>
+                                        <td>{{ $mentor->department ?? 'N/A' }}</td>
+                                        <td>{{ $mentor->position ?? 'N/A' }}</td>
+                                        <td>{{ $internCount[$mentor->id] ?? 'N/A' }}/{{ $mentor->max_interns ?? 'N/A' }}</td>
                                         <td>
-                                            <a href="{{ route('admin.intern.edit', $intern->id) }}"
+                                            <a href="{{ route('admin.mentor.edit', $mentor->id) }}"
                                                 class="btn btn-primary"><i class="fa-solid fa-edit"></i> Edit</a>
-                                            <form action="{{ route('admin.intern.destroy', $intern->user->id) }}" method="POST"
-                                                style="display:inline;">
+                                            <form action="{{ route('admin.mentor.destroy', $mentor->user->id) }}"
+                                                method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">
                                                     <i class="fa-solid fa-trash"></i> Delete
                                                 </button>
                                             </form>
-                                            <a href="{{ route('admin.intern.show', $intern->id) }}" class="btn btn-info"><i
+                                            <a href="{{ route('admin.mentor.show', $mentor->id) }}" class="btn btn-info"><i
                                                     class="fa-solid fa-eye"></i> Details</a>
                                         </td>
                                     </tr>

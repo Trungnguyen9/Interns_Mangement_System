@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\InternManagementController;
+use App\Http\Controllers\Admin\MentorManagementController;
 use App\Http\Middleware\CheckAdminRole;
 
 
@@ -41,4 +42,17 @@ Route::prefix('adminpage')
         Route::get('/intern/show/{id}', [InternManagementController::class, 'show'])->name('admin.intern.show');
         // delete
         Route::delete('/intern/{id}', [InternManagementController::class, 'destroy'])->name('admin.intern.destroy');
+
+        // Mentor Management
+        Route::get('/mentor', [MentorManagementController::class, 'index'])->name('admin.mentor.index');
+        // add
+        Route::get('/mentor/create', [MentorManagementController::class, 'create'])->name('admin.mentor.create');
+        Route::post('/mentor/create', [MentorManagementController::class, 'store']);
+        // edit
+        Route::get('/mentor/edit/{id}', [MentorManagementController::class, 'edit'])->name('admin.mentor.edit');
+        Route::post('/mentor/edit/{id}', [ MentorManagementController::class, 'update']);
+        // show
+        Route::get('/mentor/show/{id}', [MentorManagementController::class, 'show'])->name('admin.mentor.show');
+        // delete
+        Route::delete('/mentor/{id}', [MentorManagementController::class, 'destroy'])->name('admin.mentor.destroy');
     });

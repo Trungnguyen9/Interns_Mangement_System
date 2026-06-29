@@ -40,58 +40,47 @@ class InternManagementController extends Controller
      */
     public function store(addInternRequest $request)
     {
+        $mentor = Mentor_profiles::withCount('interns')
+            ->findOrFail($request->mentor_id);
+
+        if ($mentor->interns_count >= $mentor->max_interns) {
+
+            return back()
+                ->withInput()
+                ->with(
+                    'error',
+                    'Mentor này đã đạt số lượng intern tối đa.'
+                );
+        }
+        
         DB::beginTransaction();
-
-
+        
         try {
-
-
             // 1. Tạo user trước
-
             $user = User::create([
-
                 'name' => $request->name,
-
                 'email' => $request->email,
-
                 'password' => Hash::make($request->password),
-
                 'id_role' => 3,
-
                 'status' => 'active'
-
             ]);
-
 
 
             // 2. Tạo intern profile
-
             Intern_profiles::create([
-
                 'user_id' => $user->id,
-
                 'full_name' => $request->full_name,
-
                 'school' => $request->school,
-
                 'academic_year' => $request->academic_year,
-
                 'desired_technology' => $request->desired_technology,
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
-
                 'mentor_id' => $request->mentor_id,
-
                 'status' => $request->status
-
             ]);
 
 
-
             DB::commit();
-
-
-
             return redirect('adminpage/intern')
                 ->with(
                     'success',
@@ -136,16 +125,30 @@ class InternManagementController extends Controller
      */
     public function update(updateInternRequest $request, string $id)
     {
+        $intern = Intern_profiles::findOrFail($id);
+
+        if ($request->mentor_id != $intern->mentor_id) {
+            $mentor = Mentor_profiles::withCount('interns')
+                ->findOrFail($request->mentor_id);
+
+            if ($mentor->interns_count >= $mentor->max_interns) {
+                return back()
+                    ->withInput()
+                    ->with('error', 'Mentor này đã đạt số lượng intern tối đa.');
+            }
+        }
         DB::beginTransaction();
 
+
+
         try {
-            $intern = Intern_profiles::findOrFail($id);
+
             $user = $intern->user;
-            
+
             if (!$user) {
                 throw new \Exception('Không tìm thấy User');
             }
-            
+
 
             // Cập nhật thông tin user
             $user->update([
@@ -183,6 +186,7 @@ class InternManagementController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::destroy($id);
+        return redirect()->back()->with('success', 'User deleted successfully.');
     }
 }
