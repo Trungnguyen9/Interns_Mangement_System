@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             MentorAndInternSeeder::class,
             TaskSeeder::class,
             WeeklyReportSeeder::class,
+            SystemMockDataSeeder::class
         ]);
     }
 }
