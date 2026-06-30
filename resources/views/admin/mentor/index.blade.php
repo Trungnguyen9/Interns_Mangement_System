@@ -45,6 +45,25 @@
                         {{-- <h6 class="card-subtitle">Admin: 1; Mentor: 2; Intern: 3</h6> --}}
                         <a href="{{ route('admin.mentor.create') }}" class="btn btn-success">Add New</a>
                     </div>
+                    {{-- Bộ lọc --}}
+                    <div class="card-body">
+                        <form method="GET" action="{{ route('admin.mentor.index') }}" class="row mb-3">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control"
+                                    placeholder="Search by name or email" value="{{ request('search') }}">
+                                <select name="status" class="form-control">
+                                    <option value="">All Status</option>
+                                    <option value="Full" {{ request('status') == 'Full' ? 'selected' : '' }}>Full</option>
+                                    <option value="Available" {{ request('status') == 'Available' ? 'selected' : '' }}>
+                                        Available</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    {{--  --}}
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -66,7 +85,8 @@
                                         <td>{{ $mentor->user->email }}</td>
                                         <td>{{ $mentor->department ?? 'N/A' }}</td>
                                         <td>{{ $mentor->position ?? 'N/A' }}</td>
-                                        <td>{{ $internCount[$mentor->id] ?? 'N/A' }}/{{ $mentor->max_interns ?? 'N/A' }}</td>
+                                        <td>{{ $internCount[$mentor->id] ?? 'N/A' }}/{{ $mentor->max_interns ?? 'N/A' }}
+                                        </td>
                                         <td>
                                             <a href="{{ route('admin.mentor.edit', $mentor->id) }}"
                                                 class="btn btn-primary"><i class="fa-solid fa-edit"></i> Edit</a>
@@ -85,6 +105,11 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-end">
+                            {{ $data->appends(request()->query())->links('pagination::bootstrap-4') }}
+                        </div>
                     </div>
                 </div>
             </div>

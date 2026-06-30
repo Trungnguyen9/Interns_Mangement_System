@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\InternManagementController;
 use App\Http\Controllers\Admin\MentorManagementController;
+use App\Http\Controllers\Frontend\DashboardController as FrontendDashboardController;
 use App\Http\Middleware\CheckAdminRole;
 
 
@@ -50,9 +51,11 @@ Route::prefix('adminpage')
         Route::post('/mentor/create', [MentorManagementController::class, 'store']);
         // edit
         Route::get('/mentor/edit/{id}', [MentorManagementController::class, 'edit'])->name('admin.mentor.edit');
-        Route::post('/mentor/edit/{id}', [ MentorManagementController::class, 'update']);
+        Route::post('/mentor/edit/{id}', [MentorManagementController::class, 'update']);
         // show
         Route::get('/mentor/show/{id}', [MentorManagementController::class, 'show'])->name('admin.mentor.show');
         // delete
         Route::delete('/mentor/{id}', [MentorManagementController::class, 'destroy'])->name('admin.mentor.destroy');
     });
+
+    Route::get('/dashboard', [FrontendDashboardController::class, 'index']);
