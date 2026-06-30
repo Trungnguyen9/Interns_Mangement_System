@@ -17,10 +17,44 @@ class MentorManagementController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Mentor_profiles::with('user', 'interns', 'tasks')->get();
-        $internCount = Mentor_profiles::withCount('interns')->get()->pluck('interns_count', 'id');
+        $query = Mentor_profiles::withCount('interns');
+
+        // search
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('full_name', 'like', '%' . $request->search . '%')
+                    ->orWhereHas('user', function ($subQuery) use ($request) {
+                        $subQuery->where('email', 'like', '%' . $request->search . '%');
+                    });
+            });
+        }
+
+
+        // filter by status
+        if ($request->filled('status')) {
+
+            if ($request->status === 'Full') {
+
+                $query->havingRaw('interns_count >= max_interns');
+            }
+
+            if ($request->status === 'Available') {
+
+                $query->havingRaw('interns_count < max_interns');
+            }
+        }
+
+
+        $data = $query
+            ->with('user', 'interns', 'tasks')
+            ->paginate(5);
+
+
+        $internCount = $data->pluck('interns_count', 'id');
+
+
         return view('admin.mentor.index', compact('data', 'internCount'));
     }
 
@@ -115,7 +149,7 @@ class MentorManagementController extends Controller
             if (!$user) {
                 throw new \Exception('Không tìm thấy User');
             }
-            
+
 
             // Cập nhật thông tin user
             $user->update([

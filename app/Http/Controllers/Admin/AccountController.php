@@ -17,9 +17,26 @@ class AccountController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = user::all();
+        $query = user::query();
+        // search
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%');
+            });
+        }
+        // filter by status 
+        if ($request->filled('status') && in_array($request->status, ['active', 'inactive'])) {
+            $query->where('status', $request->status);
+        }
+        // filter by role
+        if ($request->filled('id_role') && in_array($request->id_role, ['1', '2', '3'])) {
+            $query->where('id_role', $request->id_role);
+        }
+
+        $data = $query->paginate(5);
         return view('admin.Acc_role.index', compact('data'));
     }
 

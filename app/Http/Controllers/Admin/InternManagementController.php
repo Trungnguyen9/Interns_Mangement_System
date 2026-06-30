@@ -19,11 +19,30 @@ class InternManagementController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // $data = User::with('internProfile', 'role', 'mentorProfile')->get();
-        $data = Intern_profiles::with('user', 'mentor', 'tasks', 'weeklyReports')->get();
-        return view('admin.intern.index', compact('data'));
+        $query = Intern_profiles::query();
+        // search
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('full_name', 'like', '%' . $request->search . '%')
+                    ->orWhereHas('user', function ($subQuery) use ($request) {
+                        $subQuery->where('email', 'like', '%' . $request->search . '%');
+                    });
+            });
+        }
+        // filter by status 
+        if ($request->filled('status') && in_array($request->status, ['Đang thực tập', 'Đã hoàn thành'])) {
+            $query->where('status', $request->status);
+        }
+        // filter by mentor
+        if ($request->filled('mentor_id')) {
+            $query->where('mentor_id', $request->mentor_id);
+        }
+
+        $mentors = Mentor_profiles::with('user')->get();
+        $data = $query->with('user', 'mentor', 'tasks', 'weeklyReports')->paginate(5);
+        return view('admin.intern.index', compact('data', 'mentors'));
     }
 
     /**
@@ -52,9 +71,9 @@ class InternManagementController extends Controller
                     'Mentor này đã đạt số lượng intern tối đa.'
                 );
         }
-        
+
         DB::beginTransaction();
-        
+
         try {
             // 1. Tạo user trước
             $user = User::create([
