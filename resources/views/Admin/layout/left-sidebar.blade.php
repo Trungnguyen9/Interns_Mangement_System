@@ -10,7 +10,7 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
-                
+                 
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/adminpage/account') }}" aria-expanded="false">
                         <i class="mdi mdi-account-multiple"></i>
