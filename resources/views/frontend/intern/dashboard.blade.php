@@ -1,4 +1,4 @@
-@extends('frontend.layouts.intern')
+@extends('frontend.intern.layouts.intern')
 
 @section('title', 'Dashboard')
 @section('breadcrumb', 'Dashboard')

@@ -32,7 +32,7 @@
     <!-- ============================================================== -->
     <div class="preloader">
         <div class="lds-ripple">
-            <div class="lds-pos"></div>
+            <div class="lds-pos"></div> 
             <div class="lds-pos"></div>
         </div>
     </div>
@@ -73,7 +73,7 @@
     <script src="{{ asset('admin/assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{ asset('admin/assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script> 
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="{{ asset('admin/assets/extra-libs/sparkline/sparkline.js') }}"></script>
     <!-- Wave Effects -->

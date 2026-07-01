@@ -60,4 +60,36 @@ class Intern_profiles extends Model
             'intern_id'
         );
     }
+
+    public function getTotalTasksAttribute()
+    {
+        return $this->tasks()->count();
+    }
+
+    public function getDoneTasksCountAttribute()
+    {
+        return $this->tasks()->where('status', 'Done')->count();
+    }
+
+    public function getPendingTasksCountAttribute()
+    {
+        return $this->total_tasks - $this->done_tasks_count;
+    }
+
+    public function getOverdueTasksCountAttribute()
+    {
+        return $this->tasks()
+            ->where('status', '!=', 'Done')
+            ->where('deadline', '<', now())
+            ->count();
+    }
+
+    public function getProgressPercentAttribute()
+    {
+        return $this->total_tasks > 0
+            ? round(($this->done_tasks_count / $this->total_tasks) * 100)
+            : 0;
+    }
+    // <div>Tiến độ: {{ $intern->progress_percent }}%</div>
+
 }

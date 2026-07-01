@@ -7,8 +7,10 @@ use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\InternManagementController;
 use App\Http\Controllers\Admin\MentorManagementController;
 use App\Http\Controllers\Frontend\DashboardController as FrontendDashboardController;
+use App\Http\Controllers\Frontend\ProfilesController;
+use App\Http\Controllers\Frontend\TaskController;
 use App\Http\Middleware\CheckAdminRole;
-
+use App\Http\Middleware\CheckInternRole;
 
 Auth::routes();
 
@@ -58,4 +60,19 @@ Route::prefix('adminpage')
         Route::delete('/mentor/{id}', [MentorManagementController::class, 'destroy'])->name('admin.mentor.destroy');
     });
 
-    Route::get('/dashboard', [FrontendDashboardController::class, 'index']);
+Route::prefix('internpage')->middleware(['auth', CheckInternRole::class])->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [FrontendDashboardController::class, 'index'])->name('frontend.intern');
+
+    // Profiles
+    Route::get('/profile', [ProfilesController::class, 'index'])->name('frontend.profile.index');
+    //edit
+    Route::get('/profile/edit/{id}', [ProfilesController::class, 'edit'])->name('frontend.intern.profile.edit');
+    Route::post('/profile/edit/{id}', [ProfilesController::class, 'update']);
+
+    // Tasks
+    Route::get('/tasks', [TaskController::class, 'index'])->name('frontend.intern.tasks');
+    //edit
+    Route::get('/tasks/edit/{id}', [TaskController::class, 'edit'])->name('frontend.intern.tasks.edit');
+    Route::post('/tasks/edit/{id}', [TaskController::class, 'update'])->name('frontend.intern.tasks.update');
+});
