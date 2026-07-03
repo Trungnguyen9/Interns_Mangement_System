@@ -48,6 +48,7 @@
                     {{-- Bộ lọc --}}
                     <div class="card-body">
                         <form method="GET" action="{{ route('admin.intern.index') }}" class="row mb-3">
+                            @csrf
                             <div class="input-group">
                                 <input type="text" name="search" class="form-control"
                                     placeholder="Search by name or email" value="{{ request('search') }}">
