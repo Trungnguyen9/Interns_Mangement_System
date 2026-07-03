@@ -12,11 +12,37 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $intern = Auth::user()->internProfile;
-       
-        $tasks = $intern->tasks()->paginate(5);
+
+        $tasks = $intern->tasks();
+
+        // Search
+        if ($request->filled('search')) {
+            $tasks->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        // Status
+        if ($request->filled('status')) {
+
+            if ($request->status === 'Overdue') {
+
+                $tasks->whereDate('deadline', '<', now())
+                    ->where('status', '!=', 'Done');
+            } else {
+
+                $tasks->where('status', $request->status);
+            }
+        }
+
+        // Priority
+        if ($request->filled('priority')) {
+            $tasks->where('priority', $request->priority);
+        }
+
+        $tasks = $tasks->paginate(5);
+
 
         return view('frontend.intern.tasks.tasks', compact('tasks', 'intern'));
     }

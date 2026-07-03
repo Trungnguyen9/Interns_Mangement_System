@@ -16,7 +16,8 @@
                     class="fa-solid fa-layer-group"></i></div>
             <div>
                 <div style="font-size:11px;color:var(--c-text-sub)">Tất cả</div>
-                <div style="font-size:20px;font-weight:700;color:var(--c-primary)">{{ auth()->user()->internProfile->pending_tasks_count }}</div>
+                <div style="font-size:20px;font-weight:700;color:var(--c-primary)">
+                    {{ auth()->user()->internProfile->pending_tasks_count }}</div>
             </div>
         </div>
         <div class="stat-mini">
@@ -42,21 +43,23 @@
                     class="fa-solid fa-circle-xmark"></i></div>
             <div>
                 <div style="font-size:11px;color:var(--c-text-sub)">Quá hạn</div>
-                <div style="font-size:20px;font-weight:700;color:var(--c-danger)">{{ auth()->user()->internProfile->overdue_tasks_count }}</div>
+                <div style="font-size:20px;font-weight:700;color:var(--c-danger)">
+                    {{ auth()->user()->internProfile->overdue_tasks_count }}</div>
             </div>
         </div>
     </div>
 
     {{-- Toolbar --}}
-    <form method="GET" action="#" class="toolbar" style="margin-top:20px">
+    <form method="get" action="{{ route('frontend.intern.tasks') }}" class="toolbar" style="margin-top:20px">
+        @csrf
         <input type="text" name="search" class="form-control" placeholder="Tìm task theo tên..."
             value="{{ request('search') }}">
         <select name="status" class="form-control" style="width:auto">
             <option value="">Tất cả trạng thái</option>
-            <option value="todo" @selected(request('status') === 'todo')>Chờ thực hiện</option>
-            <option value="inprog" @selected(request('status') === 'inprog')>Đang làm</option>
-            <option value="done" @selected(request('status') === 'done')>Hoàn thành</option>
-            <option value="overdue" @selected(request('status') === 'overdue')>Quá hạn</option>
+            <option value="Todo" @selected(request('status') === 'Todo')>Chờ thực hiện</option>
+            <option value="Doing" @selected(request('status') === 'Doing')>Đang làm</option>
+            <option value="Done" @selected(request('status') === 'Done')>Hoàn thành</option>
+            <option value="Overdue" @selected(request('status') === 'Overdue')>Quá hạn</option>
         </select>
         <select name="priority" class="form-control" style="width:auto">
             <option value="">Tất cả độ ưu tiên</option>
@@ -64,6 +67,7 @@
             <option value="medium" @selected(request('priority') === 'medium')>Trung bình</option>
             <option value="low" @selected(request('priority') === 'low')>Thấp</option>
         </select>
+        <button class="btn btn-primary" type="submit">Search</button>
     </form>
 
     {{-- Table --}}
