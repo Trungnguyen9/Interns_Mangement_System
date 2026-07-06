@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\InternManagementController;
 use App\Http\Controllers\Admin\MentorManagementController;
 use App\Http\Controllers\Frontend\DashboardController as FrontendDashboardController;
 use App\Http\Controllers\Frontend\ProfilesController;
+use App\Http\Controllers\Frontend\ReportController;
 use App\Http\Controllers\Frontend\TaskController;
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Middleware\CheckInternRole;
@@ -75,4 +76,9 @@ Route::prefix('internpage')->middleware(['auth', CheckInternRole::class])->group
     //edit
     Route::get('/tasks/edit/{id}', [TaskController::class, 'edit'])->name('frontend.intern.tasks.edit');
     Route::post('/tasks/edit/{id}', [TaskController::class, 'update'])->name('frontend.intern.tasks.update');
+
+    // Weekly Reports
+    Route::get('reports', [ReportController::class, 'index'])->name('frontend.intern.reports');
+    // add
+    Route::post('reports/create', [ReportController::class, 'store'])->name('frontend.intern.reports.store');
 });
