@@ -13,7 +13,7 @@
             <span class="badge-count">{{ auth()->user()->internProfile->tasks->count() }}</span>
         @endif
     </a>
-    <a href="#" class="sidebar-item">
+    <a href="{{ url('/internpage/reports') }}" class="sidebar-item">
         <i class="fa-solid fa-file-lines icon"></i> Weekly Report
     </a>
 

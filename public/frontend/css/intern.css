@@ -816,77 +816,78 @@ textarea.form-control {
 
 /* ===== Modal overlay (nền mờ phủ toàn màn hình) ===== */
 .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 20px;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
 }
 
 .modal-overlay.hidden {
-    display: none;
+  display: none;
 }
 
 /* ===== Khung trắng của modal ===== */
 .modal-box {
-    background: #fff;
-    border-radius: var(--radius);
-    width: 100%;
-    max-width: 560px;
-    max-height: 85vh;
-    overflow-y: auto;
-    position: relative;
-    padding: 24px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, .15);
+  background: #fff;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 560px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .15);
 }
 
 /* ===== Nút đóng (x) ===== */
 .modal-close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 28px;
-    height: 28px;
-    border: none;
-    background: var(--c-bg);
-    color: var(--c-text-sub);
-    border-radius: 50%;
-    font-size: 16px;
-    line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background .15s;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: var(--c-bg);
+  color: var(--c-text-sub);
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s;
 }
 
 .modal-close:hover {
-    background: var(--c-danger-l);
-    color: var(--c-danger);
+  background: var(--c-danger-l);
+  color: var(--c-danger);
 }
 
 /* ===== Nội dung chi tiết task bên trong modal ===== */
 .task-detail h3 {
-    font-size: 18px;
-    font-weight: 700;
-    margin: 0 0 12px;
-    padding-right: 32px; /* chừa chỗ cho nút đóng, tránh đè chữ */
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  padding-right: 32px;
+  /* chừa chỗ cho nút đóng, tránh đè chữ */
 }
 
 .task-detail .form-group {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .task-detail .form-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--c-text-sub);
-    text-transform: uppercase;
-    letter-spacing: .3px;
-    margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-text-sub);
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  margin-bottom: 6px;
 }
 
 
@@ -1032,6 +1033,45 @@ textarea.form-control {
 .ims-page-link i {
   font-size: 12px;
 }
+
+/* Alert */
+.alert {
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  border-left: 5px solid transparent;
+  /* Tạo điểm nhấn ở viền trái */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.alert-danger {
+  background-color: #fdf2f2;
+  /* Nền đỏ hồng nhạt cực dịu mắt */
+  color: #ec4899;
+  /* Màu chữ hồng đỏ đậm (hoặc dùng #de3e3e) */
+  border-color: #fca5a5;
+  /* Viền hồng nhạt */
+  border-left-color: #ef4444;
+  /* Viền trái màu đỏ đậm làm điểm nhấn */
+}
+
+/* Thêm hiệu ứng cho liên kết (link) nếu có bên trong alert */
+.alert-danger a {
+  color: #b91c1c;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.alert-danger a:hover {
+  color: #7f1d1d;
+}
+
+
 
 /* ==========================================================================
    RESPONSIVE

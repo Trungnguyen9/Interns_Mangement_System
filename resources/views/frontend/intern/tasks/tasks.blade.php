@@ -78,6 +78,7 @@
                     <th>Stt</th>
                     <th>Tên task</th>
                     <th>Mô tả</th>
+                    <th>Ngày tạo</th>
                     <th>Deadline</th>
                     <th>Độ ưu tiên</th>
                     <th>Trạng thái</th>
@@ -94,6 +95,7 @@
                             <div class="task-title">{{ $item->title }}</div>
                         </td>
                         <td style="max-width:200px">{{ $item->description }}</td>
+                        <td>{{ $item->created_at }}</td>
                         <td
                             class="{{ $item->is_overdue ? 'deadline-over' : '' }}
                                     {{ $item->is_near_deadline ? 'deadline-near' : '' }}">
@@ -126,46 +128,4 @@
             </div>
         </div>
     </div>
-    {{-- <div class="modal-overlay" id="taskModal">
-        <div class="modal">
-            <div class="modal-title">
-                Chi tiết task
-                <button type="button" onclick="closeDetail()"
-                    style="background:none;border:none;cursor:pointer;font-size:18px;color:var(--c-text-sub)">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div id="modalTaskTitle" style="font-size:16px;font-weight:700;margin-bottom:4px">Thiết kế ERD database</div>
-            <div style="font-size:13px;color:var(--c-text-sub);margin-bottom:16px">tasks.id = 1 · Được giao: 01/06/2025 ·
-                Deadline: 10/06/2025</div>
-            <div style="display:flex;gap:8px;margin-bottom:16px"><span class="badge pri-high">Cao</span><span
-                    class="badge done">Hoàn thành</span></div>
-            <div class="form-group">
-                <div class="form-label">Mô tả</div>
-                <div id="modalTaskDesc"
-                    style="font-size:13px;color:var(--c-text-sub);background:var(--c-bg);padding:10px;border-radius:var(--radius)">
-                    Vẽ sơ đồ Entity-Relationship cho hệ thống IMS, bao gồm: users, mentor_profiles, intern_profiles, tasks,
-                    weekly_reports.
-                </div>
-            </div>
-            <form method="POST">
-                @csrf
-                <input type="hidden" name="task_id" id="modalTaskId">
-                <div class="form-group">
-                    <div class="form-label">Cập nhật tiến độ</div>
-                    <textarea name="mentor_comment_note" class="form-control" rows="3" placeholder="Nhập ghi chú tiến độ...">Đã hoàn thành ERD với 5 bảng chính, có quan hệ 1-1 và 1-N.</textarea>
-                </div>
-                <div
-                    style="display:flex;align-items:center;gap:8px;background:var(--c-success-l);padding:12px;border-radius:var(--radius);font-size:13px;color:#276749;margin-bottom:16px">
-                    <i class="fa-solid fa-comment-dots"></i>
-                    <span><b>Mentor nhận xét:</b> "ERD rõ ràng, thêm index cho foreign key nhé."</span>
-                </div>
-                <div style="display:flex;gap:10px;justify-content:flex-end">
-                    <button type="button" class="btn btn-outline" onclick="closeDetail()">Đóng</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Lưu tiến
-                        độ</button>
-                </div>
-            </form>
-        </div>
-    </div> --}}
 @endsection
