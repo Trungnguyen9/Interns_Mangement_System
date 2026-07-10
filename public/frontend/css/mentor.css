@@ -1,0 +1,585 @@
+/* ==========================================================================
+   IMS – Mentor Portal Stylesheet (extends intern.css)
+   public/css/mentor.css
+
+   Load AFTER intern.css — reuses .ims-shell, .card, .badge, .btn-*, .tbl,
+   .form-control, .toolbar, .section-divider, .stat-card etc. from there.
+   This file only adds mentor-specific components: Kanban board, intern
+   roster rows, task/report review comment boxes.
+   ========================================================================== */
+
+/* Mentor sidebar avatar accent (success/green instead of intern's blue) */
+.ims-avatar.mentor-avatar-accent {
+  background: var(--c-success-l);
+  color: var(--c-success);
+}
+
+/* Slot capacity badge in header / sidebar ("2 / 3") */
+.slot-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--c-primary-l);
+  color: var(--c-primary);
+}
+
+.slot-badge.full {
+  background: var(--c-danger-l);
+  color: var(--c-danger);
+}
+
+/* ==========================================================================
+   Intern roster row (used in dashboard widget + interns list page)
+   ========================================================================== */
+.intern-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--c-border);
+  font-size: 13px;
+}
+
+.intern-row:last-child {
+  border-bottom: none;
+}
+
+.intern-row-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.intern-row-sub {
+  font-size: 11px;
+  color: var(--c-text-sub);
+}
+
+.mini-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--c-primary-l);
+  color: var(--c-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.mini-avatar.lg {
+  width: 48px;
+  height: 48px;
+  font-size: 16px;
+}
+
+/* ==========================================================================
+   Kanban board (Tasks page)
+   ========================================================================== */
+.kanban {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.kcol {
+  background: var(--c-bg);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+  min-height: 200px;
+}
+
+.kcol-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--c-text-sub);
+  margin-bottom: 10px;
+}
+
+.kcol-count {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 99px;
+  padding: 1px 8px;
+  font-size: 11px;
+}
+
+.kcard {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: box-shadow .15s, border-color .15s;
+}
+
+.kcard:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--c-primary);
+}
+
+.kcard-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.kcard-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--c-text-sub);
+}
+
+.kcard-intern {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Status badges specific to task workflow: todo / doing / review / done */
+.badge.todo {
+  background: #f7fafc;
+  color: #718096;
+  border: 1px solid var(--c-border);
+}
+
+.badge.doing {
+  background: var(--c-info-l);
+  color: var(--c-info);
+}
+
+.badge.review {
+  background: var(--c-warning-l);
+  color: var(--c-warning);
+}
+
+.badge.done {
+  background: var(--c-success-l);
+  color: var(--c-success);
+}
+
+/* ==========================================================================
+   Task detail / review panel
+   ========================================================================== */
+.review-panel {
+  margin-top: 20px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.detail-field {
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 9px 12px;
+}
+
+.detail-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--c-text-sub);
+  margin-bottom: 2px;
+}
+
+.detail-val {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Comment / review input row */
+.comment-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  margin-top: 10px;
+}
+
+.comment-box i {
+  color: var(--c-primary);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.comment-box input,
+.comment-box textarea {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  color: var(--c-text);
+  resize: none;
+}
+
+.comment-box input:focus,
+.comment-box textarea:focus {
+  outline: none;
+}
+
+.action-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   Weekly report review card (mentor view)
+   ========================================================================== */
+.report-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.report-intern-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.report-intern-tag i {
+  color: var(--c-primary);
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   Modal overlay for "Giao task mới" (create task) form
+   ========================================================================== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .45);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal {
+  background: var(--c-surface);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  width: 520px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Capacity warning banner (mentor at max_interns) */
+.capacity-warning {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--c-warning-l);
+  border: 1px solid #fbd38d;
+  border-radius: var(--radius);
+  font-size: 12px;
+  color: #975a16;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 768px) {
+  .kanban {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Intern Task Index – card grid (tasks_index.blade.php)
+   Thêm vào dưới cùng mentor.css — không ảnh hưởng các class cũ.
+   ========================================================================== */
+.intern-task-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.intern-task-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow .15s, border-color .15s;
+}
+
+.intern-task-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .09);
+  border-color: var(--c-primary);
+}
+
+.itc-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.itc-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.itc-name {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itc-sub {
+  font-size: 12px;
+  color: var(--c-text-sub);
+  margin-top: 2px;
+}
+
+.itc-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.itc-progress-track {
+  height: 7px;
+  background: var(--c-bg);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.itc-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--c-primary);
+  transition: width .4s ease;
+}
+
+.itc-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--c-text-sub);
+}
+
+.itc-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--c-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--c-border);
+}
+
+.itc-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px;
+  position: relative;
+  border-right: 1px solid var(--c-border);
+}
+
+.itc-stat:last-child {
+  border-right: none;
+}
+
+.itc-stat-num {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.itc-stat-label {
+  font-size: 10px;
+  color: var(--c-text-sub);
+  margin-top: 3px;
+}
+
+.itc-review-dot {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-warning);
+}
+
+.itc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+  border-top: 1px solid var(--c-border);
+}
+
+.itc-period {
+  font-size: 11px;
+  color: var(--c-text-sub);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.itc-btn {
+  padding: 6px 14px;
+  font-size: 12px;
+}
+
+/* ==========================================================================
+   Kanban page header (tasks_kanban.blade.php)
+   ========================================================================== */
+.kanban-page-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.kanban-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--c-text-sub);
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  background: var(--c-surface);
+  white-space: nowrap;
+  transition: all .15s;
+}
+
+.kanban-back-btn:hover {
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+.kanban-intern-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 8px 14px;
+}
+
+.kanban-intern-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.kanban-intern-sub {
+  font-size: 11px;
+  color: var(--c-text-sub);
+}
+
+.kanban-header-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 8px 16px;
+}
+
+.khs-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.khs-num {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.khs-label {
+  font-size: 10px;
+  color: var(--c-text-sub);
+}
+
+.khs-sep {
+  width: 1px;
+  height: 24px;
+  background: var(--c-border);
+}
+
+/* Nút review/done — mờ mặc định, sáng khi task ở trạng thái Review */
+#btnReturnDoing,
+#btnConfirmDone {
+  opacity: .4;
+  pointer-events: none;
+}
+
+#btnReturnDoing.active-action,
+#btnConfirmDone.active-action {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Alert danger */
+.alert-danger {
+  background: var(--c-danger-l);
+  border: 1px solid #fed7d7;
+  color: var(--c-danger);
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+}
+.alert-success {
+  background: var(--c-success-l);
+  border: 1px solid #c6f6d5;
+  color: var(--c-success);
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+}

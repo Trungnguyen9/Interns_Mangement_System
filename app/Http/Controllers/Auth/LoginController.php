@@ -42,7 +42,7 @@ class LoginController extends Controller
             return redirect()->route('admin.index')->with('success', 'Đăng nhập trang quản trị thành công');;
         }
         if ($user->id_role == '2') {
-            return redirect()->route('home')->with('success', 'Đăng nhập trang người dùng thành công');
+            return redirect()->route('frontend.mentor')->with('success', 'Đăng nhập trang người dùng thành công');
         }
         if ($user->id_role == '3') {
             return redirect()->route('frontend.intern')->with('success', 'Đăng nhập trang thực tập sinh thành công');

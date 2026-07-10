@@ -10,8 +10,13 @@ use App\Http\Controllers\Frontend\DashboardController as FrontendDashboardContro
 use App\Http\Controllers\Frontend\ProfilesController;
 use App\Http\Controllers\Frontend\ReportController;
 use App\Http\Controllers\Frontend\TaskController;
+use App\Http\Controllers\Mentor\IndexController;
+use App\Http\Controllers\Mentor\InternMnController;
+use App\Http\Controllers\Mentor\ReportMnController;
+use App\Http\Controllers\Mentor\TaskMnController;
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Middleware\CheckInternRole;
+use App\Http\Middleware\CheckMentorRole;
 
 Auth::routes();
 
@@ -81,4 +86,33 @@ Route::prefix('internpage')->middleware(['auth', CheckInternRole::class])->group
     Route::get('reports', [ReportController::class, 'index'])->name('frontend.intern.reports');
     // add
     Route::post('reports/create', [ReportController::class, 'store'])->name('frontend.intern.reports.store');
+});
+
+
+
+
+Route::prefix('mentorpage')->middleware(['auth', CheckMentorRole::class])->group(function () {
+    //Dashboard
+    Route::get('/dashboard', [IndexController::class, 'index'])->name('frontend.mentor');
+
+    //Interns Management
+    Route::get('/interns', [InternMnController::class, 'index'])->name('frontend.mentor.interns');
+    // Detail
+    Route::get('/interns/show/{id}', [InternMnController::class, 'show'])->name('frontend.mentor.interns.show');
+
+    //Tasks Management
+    Route::get('/tasks', [TaskMnController::class, 'index'])->name('frontend.mentor.tasks');
+    //Show task
+    Route::get('/tasks/show/{id}', [TaskMnController::class, 'show'])->name('frontend.mentor.tasks.show');
+    //Create
+    Route::post('/tasks/create', [TaskMnController::class, 'store'])->name('frontend.mentor.tasks.store');
+    //Edit
+    Route::post('/tasks/edit/{id}', [TaskMnController::class, 'update'])->name('frontend.mentor.tasks.update');
+    //Delete
+    // Route::delete('/tasks/{id}', [TaskMnController::class, 'destroy'])->name('frontend.mentor.tasks.destroy');
+
+    //Weekly Reports Management
+    Route::get('/reports', [ReportMnController::class, 'index'])->name('frontend.mentor.reports');
+
+
 });

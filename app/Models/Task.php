@@ -40,7 +40,7 @@ class Task extends Model
     public function getIsOverdueAttribute()
     {
         return $this->deadline < now()
-            && $this->status != 'Đã hoàn thành';
+            && $this->status != 'Done';
     }
 
 
@@ -48,6 +48,6 @@ class Task extends Model
     {
         return $this->deadline <= now()->addDays(3)
             && $this->deadline >= now()
-            && $this->status != 'Đã hoàn thành';
+            && $this->status != 'Done';
     }
 }
