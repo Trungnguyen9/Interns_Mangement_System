@@ -15,6 +15,7 @@ class WeeklyReportSeeder extends Seeder
     public function run(): void
     {
         $interns = Intern_profiles::all();
+
         if ($interns->isEmpty()) {
             return;
         }
@@ -30,6 +31,7 @@ class WeeklyReportSeeder extends Seeder
             'difficulties' => 'Needed more time to understand the existing project structure and blade templates.',
             'next_plan' => 'Finish the intern profile edit form and connect it to the backend.',
             'reference_links' => 'https://laravel.com/docs/10.x/eloquent, https://vuejs.org/',
+            'status' => 'reviewed',
             'mentor_comment' => 'Keep going. Pay attention to validation and user experience.',
         ]);
 
@@ -42,7 +44,8 @@ class WeeklyReportSeeder extends Seeder
                 'difficulties' => 'Encountered some foreign key issues while linking intern and mentor records.',
                 'next_plan' => 'Complete the task creation endpoint and add unit tests for API routes.',
                 'reference_links' => 'https://laravel.com/docs/10.x/eloquent-relationships',
-                'mentor_comment' => 'Nice progress. Make sure the endpoints are secure.',
+                'status' => 'pending',
+                'mentor_comment' => null,
             ]);
         }
     }
