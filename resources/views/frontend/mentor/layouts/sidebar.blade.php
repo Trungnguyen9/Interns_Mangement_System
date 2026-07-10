@@ -20,6 +20,9 @@
     <a href="{{ route('frontend.mentor.reports') }}"
         class="sidebar-item {{ request()->routeIs('frontend.mentor.reports') ? 'active' : '' }}">
         <i class="fa-solid fa-file-lines icon"></i> Báo cáo tuần
+        @if (($pendingReportCount ?? 0) > 0)
+            <span class="badge-count">{{ $pendingReportCount }}</span>
+        @endif
     </a>
 
 </aside>
