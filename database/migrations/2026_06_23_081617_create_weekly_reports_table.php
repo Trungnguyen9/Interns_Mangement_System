@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('next_plan');
             $table->string('reference_links')->nullable();
             $table->text('mentor_comment')->nullable();
+            $table->enum('status', ['pending', 'reviewed'])->default('pending');
             $table->timestamps();
             $table->unique(['intern_id', 'week_start_date', 'week_end_date']);
         });

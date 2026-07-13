@@ -113,6 +113,6 @@ Route::prefix('mentorpage')->middleware(['auth', CheckMentorRole::class])->group
 
     //Weekly Reports Management
     Route::get('/reports', [ReportMnController::class, 'index'])->name('frontend.mentor.reports');
-
-
+    //Edit
+    Route::post('/reports/edit/{id}', [ReportMnController::class, 'update'])->name('frontend.mentor.reports.update');
 });

@@ -46,12 +46,6 @@ class ReportController extends Controller
                 ]);
         }
 
-        // Kiểm tra báo cáo bị trùng khoảng thời gian
-        $exists = Weekly_report::where('intern_id', $intern->id)
-            ->where('week_start_date', $request->week_start_date)
-            ->where('week_end_date', $request->week_end_date)
-            ->exists();
-
         // Kiểm tra khoảng thời gian bị chồng lấn
         $exists = Weekly_report::where('intern_id', $intern->id)
             ->where(function ($query) use ($request) {

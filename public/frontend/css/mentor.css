@@ -575,6 +575,7 @@
   border-radius: var(--radius);
   font-size: 13px;
 }
+
 .alert-success {
   background: var(--c-success-l);
   border: 1px solid #c6f6d5;
@@ -582,4 +583,10 @@
   padding: 10px 14px;
   border-radius: var(--radius);
   font-size: 13px;
+}
+
+.report-meta {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #8a8a8a;
 }
