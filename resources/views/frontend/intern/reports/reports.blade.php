@@ -21,7 +21,7 @@
     <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">
         <div>
             <div class="page-title">Weekly Reports</div>
-            <div class="page-sub">Báo cáo tiến độ hàng tuần · {{ ($reports ?? collect())->count() ?: 5 }} báo cáo</div>
+            <div class="page-sub">Báo cáo tiến độ hàng tuần · {{ ($reports ?? collect())->count() ?: 0 }} báo cáo</div>
         </div>
         <button type="button" class="btn btn-primary" onclick="toggleForm()">
             <i class="fa-solid fa-plus"></i> Nộp báo cáo mới
@@ -111,8 +111,8 @@
                         <div class="report-col-label">Link tham khảo</div>
                         <div class="links-wrap">
                             @foreach (explode(',', $report->reference_links) as $link)
-                                <a href="{{ trim($link) }}" target="_blank" class="link-chip"><i class="fa-solid fa-link"
-                                        style="font-size:11px"></i> {{ trim($link) }}</a>
+                                <a href="{{ trim($link) }}" target="_blank" rel="noopener" class="link-chip"><i
+                                        class="fa-solid fa-link" style="font-size:11px"></i> {{ trim($link) }}</a>
                             @endforeach
                         </div>
                     </div>

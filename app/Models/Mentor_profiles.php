@@ -46,4 +46,15 @@ class Mentor_profiles extends Model
             'mentor_id'
         );
     }
+    public function weeklyReports()
+    {
+        return $this->hasManyThrough(
+            Weekly_report::class,
+            Intern_profiles::class,
+            'mentor_id',
+            'intern_id',
+            'id',
+            'id'
+        );
+    }
 }

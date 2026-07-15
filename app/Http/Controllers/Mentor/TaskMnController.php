@@ -19,10 +19,10 @@ class TaskMnController extends Controller
         $mentor = Auth::user()->mentorProfile;
         $interns = $mentor->interns->where('status', 'Đang thực tập');
 
-        $tasks = $mentor->tasks()->with('intern');
+        $tasks = $mentor->tasks()->with('intern')->get();
 
 
-        return view('frontend.mentor.tasks.tasks', compact('tasks', 'interns', 'tasks'));
+        return view('frontend.mentor.tasks.tasks', compact('tasks', 'interns'));
     }
 
     /**

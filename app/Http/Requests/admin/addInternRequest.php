@@ -31,7 +31,7 @@ class addInternRequest extends FormRequest
             'academic_year'      => 'nullable|string|max:50',
             'desired_technology' => 'nullable|string|max:255',
             'start_date'         => 'required|date',
-            'end_date'           => 'required|date|after_or_equal:start_date', // Ngày kết thúc phải sau hoặc bằng ngày bắt đầu
+            'end_date'           => 'required|date|after_or_equal:start_date', 
             'status'             => 'required|in:Đang thực tập,Đã hoàn thành',
             'mentor_id'          => 'nullable|exists:mentor_profiles,id', 
         ];

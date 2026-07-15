@@ -76,7 +76,12 @@ class TaskController extends Controller
      */
     public function edit(string $id)
     {
-        $task = Task::with(['mentor.user'])->findOrFail($id);
+        $intern = Auth::user()->internProfile;
+
+        $task = $intern->tasks()
+            ->with(['mentor.user'])
+            ->where('id', $id)
+            ->firstOrFail();
 
         return view('frontend.intern.tasks.task-detail', compact('task'))->render();
     }
@@ -90,7 +95,11 @@ class TaskController extends Controller
             'status' => 'required|in:Todo,Doing,Review',
         ]);
 
-        $task = Task::findOrFail($id);
+        $intern = Auth::user()->internProfile;
+
+        $task = $intern->tasks()
+            ->where('id', $id)
+            ->firstOrFail();
 
         // nếu task đã Done, không ai qua route intern sửa được nữa
         if ($task->status === 'Done') {

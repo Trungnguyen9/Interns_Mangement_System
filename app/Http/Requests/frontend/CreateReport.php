@@ -54,8 +54,15 @@ class CreateReport extends FormRequest
 
             'reference_links' => [
                 'nullable',
-                'string',
-                'max:1000',
+                function ($attribute, $value, $fail) {
+                    $links = array_filter(array_map('trim', explode(',', $value)));
+
+                    foreach ($links as $link) {
+                        if (!filter_var($link, FILTER_VALIDATE_URL)) {
+                            $fail("Link '{$link}' không phải là URL hợp lệ.");
+                        }
+                    }
+                },
             ],
         ];
     }

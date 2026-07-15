@@ -61,9 +61,9 @@ class ProfilesController extends Controller
      */
     public function update(updateInternProfile $request, string $id)
     {
-        $intern = Intern_profiles::findOrFail($id);
+        $intern = Auth::user()->internProfile()->firstOrFail();
 
-        
+
         DB::beginTransaction();
 
         try {
