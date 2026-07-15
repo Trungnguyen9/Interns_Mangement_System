@@ -70,9 +70,16 @@
                     data-comment="{{ $task->mentor_comment }}">
                     <div class="kcard-title">{{ $task->title }}</div>
                     <div class="kcard-meta">
-                        <span style="font-size:11px;color:var(--c-text-sub)">
+                        <span class="{{ $task->is_near_deadline ? 'deadline-warning' : '' }}">
                             <i class="fa-regular fa-calendar" style="font-size:10px"></i>
                             {{ \Carbon\Carbon::parse($task->deadline)->format('d/m/Y') }}
+
+                            @if ($task->is_near_deadline)
+                                <span class="deadline-badge">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    Sắp hết hạn
+                                </span>
+                            @endif
                         </span>
                         <span class="badge pri-{{ strtolower($task->priority) }}">{{ ucfirst($task->priority) }}</span>
                     </div>
@@ -94,9 +101,16 @@
                     data-comment="{{ $task->mentor_comment }}">
                     <div class="kcard-title">{{ $task->title }}</div>
                     <div class="kcard-meta">
-                        <span style="font-size:11px;color:var(--c-text-sub)">
+                        <span class="{{ $task->is_near_deadline ? 'deadline-warning' : '' }}">
                             <i class="fa-regular fa-calendar" style="font-size:10px"></i>
                             {{ \Carbon\Carbon::parse($task->deadline)->format('d/m/Y') }}
+
+                            @if ($task->is_near_deadline)
+                                <span class="deadline-badge">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    Sắp hết hạn
+                                </span>
+                            @endif
                         </span>
                         <span class="badge pri-{{ strtolower($task->priority) }}">{{ ucfirst($task->priority) }}</span>
                     </div>
@@ -124,9 +138,16 @@
                     data-comment="{{ $task->mentor_comment }}">
                     <div class="kcard-title">{{ $task->title }}</div>
                     <div class="kcard-meta">
-                        <span style="font-size:11px;color:var(--c-text-sub)">
+                        <span class="{{ $task->is_near_deadline ? 'deadline-warning' : '' }}">
                             <i class="fa-regular fa-calendar" style="font-size:10px"></i>
                             {{ \Carbon\Carbon::parse($task->deadline)->format('d/m/Y') }}
+
+                            @if ($task->is_near_deadline)
+                                <span class="deadline-badge">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    Sắp hết hạn
+                                </span>
+                            @endif
                         </span>
                         <span class="badge pri-{{ strtolower($task->priority) }}">{{ ucfirst($task->priority) }}</span>
                     </div>

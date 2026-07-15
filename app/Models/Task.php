@@ -36,7 +36,7 @@ class Task extends Model
             'intern_id'
         );
     }
-    
+
     public function getIsOverdueAttribute()
     {
         return $this->deadline < now()
@@ -46,8 +46,12 @@ class Task extends Model
 
     public function getIsNearDeadlineAttribute()
     {
-        return $this->deadline <= now()->addDays(3)
-            && $this->deadline >= now()
-            && $this->status != 'Done';
+        if ($this->status === 'Done') {
+            return false;
+        }
+
+        $days = now()->startOfDay()->diffInDays($this->deadline, false);
+
+        return $days >= 0 && $days <= 3;
     }
 }

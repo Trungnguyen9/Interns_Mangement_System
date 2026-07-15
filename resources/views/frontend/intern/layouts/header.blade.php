@@ -10,10 +10,6 @@
         <span>@yield('breadcrumb', 'Dashboard')</span>
     </div>
     <div class="ims-header-right">
-        <div class="ims-notif-btn">
-            <i class="fa-regular fa-bell"></i>
-            <div class="ims-notif-dot"></div>
-        </div>
         <div class="ims-user-chip">
             <div class="ims-avatar">{{ strtoupper(substr(auth()->user()->name ?? 'NA', 0, 2)) }}</div>
             <span class="ims-user-name">{{ auth()->user()->name ?? '#' }}</span>
