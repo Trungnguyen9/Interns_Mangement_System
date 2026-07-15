@@ -575,6 +575,7 @@
   border-radius: var(--radius);
   font-size: 13px;
 }
+
 .alert-success {
   background: var(--c-success-l);
   border: 1px solid #c6f6d5;
@@ -582,4 +583,23 @@
   padding: 10px 14px;
   border-radius: var(--radius);
   font-size: 13px;
+}
+
+
+.deadline-warning {
+  color: var(--c-danger) !important;
+  font-weight: 600;
+}
+
+.deadline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 6px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: var(--c-danger-l);
+  color: var(--c-danger);
+  font-size: 10px;
+  font-weight: 600;
 }

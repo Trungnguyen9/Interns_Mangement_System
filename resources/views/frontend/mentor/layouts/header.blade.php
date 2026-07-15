@@ -9,10 +9,6 @@
       <span>@yield('breadcrumb', 'Dashboard Mentor')</span> 
     </div>
     <div class="ims-header-right">
-      <div class="ims-notif-btn">
-        <i class="fa-regular fa-bell"></i>
-        <div class="ims-notif-dot"></div>
-      </div>
       <div class="ims-user-chip">
         <div class="ims-avatar mentor-avatar-accent">{{ strtoupper(substr(auth()->user()->name , 0, 2)) }}</div>
         <span class="ims-user-name">{{ auth()->user()->name }}</span>

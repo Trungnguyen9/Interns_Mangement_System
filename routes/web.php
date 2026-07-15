@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\InternManagementController;
 use App\Http\Controllers\Admin\MentorManagementController;
+use App\Http\Controllers\Admin\ReportAdController;
+use App\Http\Controllers\Admin\TaskAdController;
 use App\Http\Controllers\Frontend\DashboardController as FrontendDashboardController;
 use App\Http\Controllers\Frontend\ProfilesController;
 use App\Http\Controllers\Frontend\ReportController;
@@ -64,6 +66,15 @@ Route::prefix('adminpage')
         Route::get('/mentor/show/{id}', [MentorManagementController::class, 'show'])->name('admin.mentor.show');
         // delete
         Route::delete('/mentor/{id}', [MentorManagementController::class, 'destroy'])->name('admin.mentor.destroy');
+
+        // Tasks Management
+        Route::get('/task', [TaskAdController::class, 'index'])->name('admin.tasks.index');
+
+        // Reports Management
+        Route::get('/report', [ReportAdController::class, 'index'])->name('admin.reports.index');
+        // detail
+        Route::get('/report/show/{id}', [ReportAdController::class, 'show'])->name('admin.reports.show');
+        
     });
 
 Route::prefix('internpage')->middleware(['auth', CheckInternRole::class])->group(function () {
@@ -113,6 +124,4 @@ Route::prefix('mentorpage')->middleware(['auth', CheckMentorRole::class])->group
 
     //Weekly Reports Management
     Route::get('/reports', [ReportMnController::class, 'index'])->name('frontend.mentor.reports');
-
-
 });

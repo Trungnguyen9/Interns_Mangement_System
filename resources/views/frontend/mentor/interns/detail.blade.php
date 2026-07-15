@@ -52,7 +52,17 @@
         @forelse(($tasks ?? []) as $task)
             <div class="intern-row">
                 <span style="flex:1">{{ $task->title }}</span>
-                <span style="font-size:11px;color:var(--c-text-sub);margin-right:8px">{{ $task->deadline }}</span>
+                <span class="{{ $task->is_near_deadline ? 'deadline-warning' : '' }}">
+                    <i class="fa-regular fa-calendar" style="font-size:10px"></i>
+                    {{ \Carbon\Carbon::parse($task->deadline)->format('d/m/Y') }}
+
+                    @if ($task->is_near_deadline)
+                        <span class="deadline-badge">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            Sắp hết hạn
+                        </span>
+                    @endif
+                </span>
                 <span class="badge {{ $task->status }}">{{ $task->status }}</span>
             </div>
         @empty
