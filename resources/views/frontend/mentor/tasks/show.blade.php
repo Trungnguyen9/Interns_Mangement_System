@@ -75,9 +75,14 @@
                             {{ \Carbon\Carbon::parse($task->deadline)->format('d/m/Y') }}
 
                             @if ($task->is_near_deadline)
-                                <span class="deadline-badge">
+                                <span class="near-deadline-badge">
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                     Sắp hết hạn
+                                </span>
+                            @elseif ($task->is_overdue)
+                                <span class="deadline-badge">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    Quá hạn
                                 </span>
                             @endif
                         </span>
@@ -106,9 +111,14 @@
                             {{ \Carbon\Carbon::parse($task->deadline)->format('d/m/Y') }}
 
                             @if ($task->is_near_deadline)
-                                <span class="deadline-badge">
+                                <span class="near-deadline-badge">
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                     Sắp hết hạn
+                                </span>
+                            @elseif ($task->is_overdue)
+                                <span class="deadline-badge">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    Quá hạn
                                 </span>
                             @endif
                         </span>

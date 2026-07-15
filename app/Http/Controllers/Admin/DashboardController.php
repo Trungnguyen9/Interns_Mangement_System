@@ -22,41 +22,27 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // ==========================
-        // Tổng quan
-        // ==========================
         $totalInterns = Intern_profiles::count();
 
         $ongoingInterns = Intern_profiles::where('status', 'Đang thực tập')->count();
 
         $totalMentors = Mentor_profiles::count();
 
-        // ==========================
-        // Task
-        // ==========================
         $totalTasks = Task::count();
 
         $pendingReviewTasks = Task::where('status', 'Review')->count();
 
         $completedTasks = Task::where('status', 'Done')->count();
 
-        // ==========================
-        // Weekly Report
-        // ==========================
         $pendingReports = Weekly_report::where('status', 'pending')->count();
 
-        // ==========================
-        // Task gần deadline
-        // ==========================
         $nearDeadlineQuery = Task::with([
             'intern',
             'intern.mentor'
         ])
             ->where('status', '!=', 'Done')
-            ->whereBetween('deadline', [
-                now(),
-                now()->addDays(3)
-            ]);
+            ->whereDate('deadline', '>=', now()->toDateString())
+            ->whereDate('deadline', '<=', now()->addDays(3)->toDateString());
 
         $nearDeadlineTasksCount = (clone $nearDeadlineQuery)->count();
 
@@ -64,6 +50,67 @@ class DashboardController extends Controller
             ->orderBy('deadline')
             ->take(5)
             ->get();
+
+        $stats = [
+            [
+                'title' => 'Tổng số Mentor',
+                'value' => $totalMentors,
+                'icon'  => 'ti-crown',
+                'color' => 'purple',
+            ],
+
+            [
+                'title' => 'Tổng số Intern',
+                'value' => $totalInterns,
+                'icon'  => 'mdi mdi-account-card-details',
+                'color' => 'info',
+            ],
+
+            [
+                'title' => 'Đang thực tập',
+                'value' => $ongoingInterns,
+                'icon'  => 'mdi mdi-av-timer',
+                'color' => 'cyan',
+            ],
+
+            [
+                'title' => 'Báo cáo chưa review',
+                'value' => $pendingReports,
+                'icon'  => 'ti-file',
+                'color' => 'warning',
+            ],
+
+            [
+                'title' => 'Tổng số Task',
+                'value' => $totalTasks,
+                'icon'  => 'ti-clipboard',
+                'color' => 'primary',
+            ],
+
+            [
+                'title' => 'Task chờ review',
+                'value' => $pendingReviewTasks,
+                'icon'  => 'ti-eye',
+                'color' => 'orange',
+            ],
+
+            [
+                'title' => 'Task đã hoàn thành',
+                'value' => $completedTasks,
+                'icon'  => 'ti-check',
+                'color' => 'success',
+            ],
+
+            [
+                'title' => 'Task gần deadline',
+                'value' => $nearDeadlineTasksCount,
+                'icon'  => 'ti-alarm-clock',
+                'color' => 'danger',
+            ],
+        ];
+
+
+
 
         return view('admin.dashboard.index', compact(
             'totalInterns',
@@ -74,7 +121,8 @@ class DashboardController extends Controller
             'completedTasks',
             'pendingReports',
             'nearDeadlineTasksCount',
-            'nearDeadlineTasksList'
+            'nearDeadlineTasksList',
+            'stats'
         ));
     }
 

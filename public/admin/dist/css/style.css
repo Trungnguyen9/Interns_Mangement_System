@@ -15406,3 +15406,14 @@ File: scss
     display: block !important;
   }
 }
+
+.deadline-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ff4d6b;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 0px 0px 0px 5px;
+}

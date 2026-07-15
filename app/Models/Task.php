@@ -29,7 +29,7 @@ class Task extends Model
 
 
 
-    public function intern()
+    public function intern() 
     {
         return $this->belongsTo(
             Intern_profiles::class,

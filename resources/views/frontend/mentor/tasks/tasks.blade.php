@@ -27,7 +27,7 @@
                 $review = $intern->tasks->where('status', 'Review')->count();
                 $doing = $intern->tasks->where('status', 'Doing')->count();
                 $todo = $intern->tasks->where('status', 'Todo')->count();
-                $overdue = $intern->tasks->filter(fn($task) => $task->is_overdue)->count();
+                $overdue = $intern->tasks->where('is_near_deadline', true)->count();
 
                 $percent = $total > 0 ? round(($done / $total) * 100) : 0;
             @endphp
@@ -46,7 +46,7 @@
                         <span class="badge done">{{ $intern->status }}</span>
                     @endif
                 </div>
-                @if ($overdue > 0)
+                @if ($overdue > 0) 
                     <div class="itc-alert">
                         <i class="fa-solid fa-triangle-exclamation"></i>
                         Có {{ $overdue }} task quá hạn

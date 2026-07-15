@@ -590,3 +590,25 @@
   font-size: 13px;
   color: #8a8a8a;
 }
+
+.deadline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--c-danger-l);
+  color: var(--c-danger);
+  border-radius: 99px;
+  padding: 2px 8px;
+  font-size: 11px;
+}
+
+.near-deadline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--c-warning-l);
+  color: var(--c-warning);
+  border-radius: 99px;
+  padding: 2px 8px;
+  font-size: 11px;
+}
