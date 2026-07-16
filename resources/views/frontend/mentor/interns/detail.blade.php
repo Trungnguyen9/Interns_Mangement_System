@@ -30,19 +30,19 @@
     <div class="detail-grid">
         <div class="detail-field">
             <div class="detail-label">Công nghệ mong muốn</div>
-            <div class="detail-val">{{ $intern->desired_technology ?? 'Laravel, Vue.js' }}</div>
+            <div class="detail-val">{{ $intern->desired_technology ?? '__' }}</div>
         </div>
         <div class="detail-field">
             <div class="detail-label">Năm học</div>
-            <div class="detail-val">{{ $intern->academic_year ?? 'Năm 3' }}</div>
+            <div class="detail-val">{{ $intern->academic_year ?? '__' }}</div>
         </div>
         <div class="detail-field">
             <div class="detail-label">Ngày bắt đầu</div>
-            <div class="detail-val">{{ $intern->start_date ?? '01/06/2025' }}</div>
+            <div class="detail-val">{{ \Carbon\Carbon::parse($intern->start_date)->format('d/m/Y') ?? '__' }}</div>
         </div>
         <div class="detail-field">
             <div class="detail-label">Ngày kết thúc</div>
-            <div class="detail-val">{{ $intern->end_date ?? '31/08/2025' }}</div>
+            <div class="detail-val">{{ \Carbon\Carbon::parse($intern->end_date)->format('d/m/Y') ?? '__' }}</div>
         </div>
     </div>
 

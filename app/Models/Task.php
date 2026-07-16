@@ -29,7 +29,7 @@ class Task extends Model
 
 
 
-    public function intern() 
+    public function intern()
     {
         return $this->belongsTo(
             Intern_profiles::class,
@@ -40,18 +40,22 @@ class Task extends Model
     public function getIsOverdueAttribute()
     {
         return $this->deadline < now()
-            && $this->status != 'Done';
+            && !in_array($this->status, ['Done', 'Review']);
     }
-
 
     public function getIsNearDeadlineAttribute()
     {
-        if ($this->status === 'Done') {
+        if (in_array($this->status, ['Done', 'Review'])) {
             return false;
         }
 
         $days = now()->startOfDay()->diffInDays($this->deadline, false);
 
         return $days >= 0 && $days <= 3;
+    }
+
+    public function getDaysLeftAttribute()
+    {
+        return now()->startOfDay()->diffInDays($this->deadline, false);
     }
 }

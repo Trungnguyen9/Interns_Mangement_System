@@ -79,7 +79,7 @@ class Intern_profiles extends Model
     public function getOverdueTasksCountAttribute()
     {
         return $this->tasks()
-            ->where('status', '!=', 'Done')
+            ->whereNotIn('status', ['Done', 'Review'])
             ->where('deadline', '<', now())
             ->count();
     }

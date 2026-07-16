@@ -25,7 +25,7 @@
                 $total = $intern->tasks->count();
                 $done = $intern->tasks->where('status', 'Done')->count();
                 $review = $intern->tasks->where('status', 'Review')->count();
-                $doing = $intern->tasks->where('status', 'Doing')->count();
+                $doing = $intern->tasks->where('status', 'Doing')->count(); 
                 $todo = $intern->tasks->where('status', 'Todo')->count();
                 $overdue = $intern->tasks->where('is_near_deadline', true)->count();
 

@@ -10,7 +10,7 @@
     <a href="{{ url('/internpage/tasks') }}" class="sidebar-item {{ request()->routeIs('frontend.intern.tasks') ? 'active' : '' }}">
         <i class="fa-solid fa-list-check icon"></i> Tasks
         @if ((auth()->user()->internProfile->tasks->count() ?? 0) > 0)
-            <span class="badge-count">{{ auth()->user()->internProfile->tasks->where('status', '!=', 'Done')->count() }}</span>
+            <span class="badge-count">{{ auth()->user()->internProfile->tasks->whereNotIn('status', ['Done', 'Review'])->count() }}</span>
         @endif
     </a>
     <a href="{{ url('/internpage/reports') }}" class="sidebar-item {{ request()->routeIs('frontend.intern.reports') ? 'active' : '' }}">
