@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Weekly_report extends Model
@@ -26,4 +27,13 @@ class Weekly_report extends Model
             'intern_id'
         );
     }
+
+    public function getWeekRangeAttribute()
+    {
+        return Carbon::parse($this->week_start_date)->format('d/m')
+            . ' - ' .
+            Carbon::parse($this->week_end_date)->format('d/m/Y');
+    }
+
+    
 }

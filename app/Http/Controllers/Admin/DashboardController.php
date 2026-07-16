@@ -22,21 +22,34 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $totalInterns = Intern_profiles::count();
+        $internQ = Intern_profiles::query();
+        $mentorQ = Mentor_profiles::query();
+        $taskQ = Task::query();
+        $reportQ = Weekly_report::query();
 
-        $ongoingInterns = Intern_profiles::where('status', 'Đang thực tập')->count();
+        $totalInterns = (clone $internQ)->count();
 
-        $totalMentors = Mentor_profiles::count();
+        $ongoingInterns = (clone $internQ)
+            ->where('status', 'Đang thực tập')
+            ->count();
 
-        $totalTasks = Task::count();
+        $totalMentors = (clone $mentorQ)->count();
 
-        $pendingReviewTasks = Task::where('status', 'Review')->count();
+        $totalTasks = (clone $taskQ)->count();
 
-        $completedTasks = Task::where('status', 'Done')->count();
+        $pendingReviewTasks = (clone $taskQ)
+            ->where('status', 'Review')
+            ->count();
 
-        $pendingReports = Weekly_report::where('status', 'pending')->count();
+        $completedTasks = (clone $taskQ)
+            ->where('status', 'Done')
+            ->count();
 
-        $nearDeadlineQuery = Task::with([
+        $pendingReports = (clone $reportQ)
+            ->where('status', 'pending')
+            ->count();
+
+        $nearDeadlineTaskQ = Task::with([
             'intern',
             'intern.mentor'
         ])
@@ -44,9 +57,9 @@ class DashboardController extends Controller
             ->whereDate('deadline', '>=', now()->toDateString())
             ->whereDate('deadline', '<=', now()->addDays(3)->toDateString());
 
-        $nearDeadlineTasksCount = (clone $nearDeadlineQuery)->count();
+        $nearDeadlineTasksCount = (clone $nearDeadlineTaskQ)->count();
 
-        $nearDeadlineTasksList = $nearDeadlineQuery
+        $nearDeadlineTasksList = (clone $nearDeadlineTaskQ)
             ->orderBy('deadline')
             ->take(5)
             ->get();
@@ -108,9 +121,6 @@ class DashboardController extends Controller
                 'color' => 'danger',
             ],
         ];
-
-
-
 
         return view('admin.dashboard.index', compact(
             'totalInterns',

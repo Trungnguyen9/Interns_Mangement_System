@@ -17,14 +17,24 @@ class TaskAdController extends Controller
     {
         $mentors = Mentor_profiles::with('user')->get();
         $interns = Intern_profiles::with('user')->get();
+        $taskQ = Task::query();
         $stats = [
-            'total' => Task::count(),
-            'doing' => Task::where('status', 'Doing')->count(),
-            'review' => Task::where('status', 'Review')->count(),
-            'overdue' => Task::whereDate('deadline', '<', now())
+            'total' => (clone $taskQ)->count(),
+
+            'doing' => (clone $taskQ)
+                ->where('status', 'Doing')
+                ->count(),
+
+            'review' => (clone $taskQ)
+                ->where('status', 'Review')
+                ->count(),
+
+            'overdue' => (clone $taskQ)
+                ->whereDate('deadline', '<', now())
                 ->where('status', '!=', 'Done')
                 ->count(),
         ];
+        
         $tasks = Task::query()
             ->with([
                 'intern.user',
@@ -46,9 +56,19 @@ class TaskAdController extends Controller
         }
 
         if ($status = request('status')) {
-            $tasks->where('status', $status);
+            $normalizedStatus = match (strtolower($status)) {
+                'todo' => 'Todo',
+                'doing' => 'Doing',
+                'review' => 'Review',
+                'done' => 'Done',
+                default => null,
+            };
+
+            if ($normalizedStatus) {
+                $tasks->where('status', $normalizedStatus);
+            }
         }
-        
+
         if (request()->filled('deadline_from')) {
             $tasks->whereDate('deadline', '>=', request('deadline_from'));
         }

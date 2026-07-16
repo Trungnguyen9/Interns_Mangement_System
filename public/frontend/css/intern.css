@@ -490,6 +490,12 @@ body {
   gap: 12px;
 }
 
+.grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
 /* Stat cards */
 .stat-card {
   background: var(--c-surface);
@@ -541,6 +547,12 @@ body {
   color: var(--c-danger);
 }
 
+/* Added: info variant, needed for the "Chờ review" stat card */
+.si-info {
+  background: var(--c-info-l);
+  color: var(--c-info);
+}
+
 .sv-primary {
   color: var(--c-primary);
 }
@@ -555,6 +567,11 @@ body {
 
 .sv-danger {
   color: var(--c-danger);
+}
+
+/* Added: info variant, needed for the "Chờ review" stat card */
+.sv-info {
+  color: var(--c-info);
 }
 
 /* Mini stat (used in tasks page) */
@@ -1083,6 +1100,10 @@ textarea.form-control {
 
   .ims-sidebar {
     display: none;
+  }
+
+  .grid-5 {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .grid-2,

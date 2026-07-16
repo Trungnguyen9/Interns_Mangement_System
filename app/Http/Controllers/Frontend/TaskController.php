@@ -29,7 +29,7 @@ class TaskController extends Controller
             if ($request->status === 'Overdue') {
 
                 $tasks->whereDate('deadline', '<', now())
-                    ->where('status', '!=', 'Done');
+                    ->whereNotIn('status', ['Done', 'Review']);
             } else {
 
                 $tasks->where('status', $request->status);
