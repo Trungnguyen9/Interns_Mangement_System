@@ -22,10 +22,10 @@ class IndexController extends Controller
 
         $totalTasks = $mentor->tasks()->count();
 
-        $reviewTasks = $mentor->tasks->where('tasks.status', 'Review')->count();
-        $doneTasks = $mentor->tasks->where('tasks.status', 'Done')->count();
+        $reviewTasks = $mentor->tasks->where('status', 'Review')->count();
+        $doneTasks = $mentor->tasks->where('status', 'Done')->count();
         $nearDeadlineTasks = $mentor->tasks()
-            ->where('tasks.status', '!=', 'Done')
+            ->where('status', '!=', 'Done')
             ->whereDate('deadline', '>=', now()->toDateString())
             ->whereDate('deadline', '<=', now()->addDays(3)->toDateString())
             ->orderBy('deadline')

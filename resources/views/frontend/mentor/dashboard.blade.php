@@ -3,7 +3,7 @@
 @section('title', 'Dashboard Mentor')
 @section('breadcrumb', 'Dashboard')
 
-@section('content')
+@section('content') 
     <div style="margin-bottom:20px">
         <div class="page-title">Dashboard Mentor</div>
         <div class="page-sub">Chào {{ auth()->user()->name ?? 'Trần Thị Hoa' }} &nbsp;·&nbsp; Tổng quan intern bạn phụ trách
