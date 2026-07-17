@@ -38,7 +38,7 @@ Có thể sử dụng:
 ### 1. Clone repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Trungnguyen9/Interns_Mangement_System.git
 cd Interns-Management-System
 ```
 
