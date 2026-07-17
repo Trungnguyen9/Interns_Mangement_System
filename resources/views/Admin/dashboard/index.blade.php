@@ -98,7 +98,7 @@
                                             <td>
                                                 @php
                                                     $daysLeft = $task->deadline
-                                                        ? now()->diffInDays($task->deadline, false)
+                                                        ? today()->diffInDays($task->deadline, false)
                                                         : null;
                                                 @endphp
                                                 @if (!is_null($daysLeft) && $daysLeft <= 1)
