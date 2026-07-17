@@ -60,21 +60,7 @@ npm install
 
 ---
 
-### 4. Tạo file môi trường
-
-```bash
-cp .env.example .env
-```
-
-Nếu dùng Windows:
-
-```bash
-copy .env.example .env
-```
-
----
-
-### 5. Cấu hình Database
+### 4. Cấu hình Database
 
 Mở file `.env`
 
@@ -97,7 +83,7 @@ ims
 
 ---
 
-### 6. Generate Application Key
+### 5. Generate Application Key
 
 ```bash
 php artisan key:generate
@@ -105,7 +91,7 @@ php artisan key:generate
 
 ---
 
-### 7. Chạy Migration
+### 6. Chạy Migration
 
 ```bash
 php artisan migrate
@@ -125,7 +111,7 @@ php artisan migrate --seed
 
 ---
 
-### 8. Build Frontend
+### 7. Build Frontend
 
 Development
 
@@ -141,7 +127,7 @@ npm run build
 
 ---
 
-### 9. Khởi động Server
+### 8. Khởi động Server
 
 ```bash
 php artisan serve
@@ -209,11 +195,9 @@ Nếu sử dụng Seeder:
 | Mentor | mentor@example.com | password |
 | Intern | intern@example.com | password |
 
-(Nếu không dùng Seeder thì bỏ mục này.)
-
 ---
 
-## 🛠️ Các lệnh thường dùng
+## Các lệnh thường dùng
 
 Chạy server
 
@@ -253,6 +237,6 @@ npm run dev
 
 ---
 
-## 📖 Giấy phép
+## Giấy phép
 
 Dự án được phát triển phục vụ mục đích học tập và nghiên cứu.
