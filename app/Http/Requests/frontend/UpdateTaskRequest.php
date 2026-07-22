@@ -26,11 +26,11 @@ class UpdateTaskRequest extends FormRequest
         $task = Auth::user()
             ->mentorProfile
             ->tasks()
-            ->findOrFail($this->route('id'));
+            ->find($this->route('id'));
 
         $deadlineRule = ['required', 'date'];
 
-        if ($this->deadline != $task->deadline) {
+        if ($task && $this->deadline != $task->deadline) {
             $deadlineRule[] = 'after_or_equal:today';
         }
         return [

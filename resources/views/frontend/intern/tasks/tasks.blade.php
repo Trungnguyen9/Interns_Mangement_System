@@ -26,7 +26,7 @@
             <div>
                 <div style="font-size:11px;color:var(--c-text-sub)">Đang làm</div>
                 <div style="font-size:20px;font-weight:700;color:var(--c-info)">
-                    {{ $tasks->where('status', 'Doing')->count() }}</div>
+                    {{ auth()->user()->internProfile->tasks->where('status', 'Doing')->count() }}</div>
             </div>
         </div>
         <div class="stat-mini">
@@ -35,7 +35,7 @@
             <div>
                 <div style="font-size:11px;color:var(--c-text-sub)">Hoàn thành</div>
                 <div style="font-size:20px;font-weight:700;color:var(--c-success)">
-                    {{ $tasks->where('status', 'Done')->count() }}</div>
+                    {{ auth()->user()->internProfile->tasks->where('status', 'Done')->count() }}</div>
             </div>
         </div>
         <div class="stat-mini">
@@ -58,6 +58,7 @@
             <option value="">Tất cả trạng thái</option>
             <option value="Todo" @selected(request('status') === 'Todo')>Chờ thực hiện</option>
             <option value="Doing" @selected(request('status') === 'Doing')>Đang làm</option>
+            <option value="Review" @selected(request('status') === 'Review')>Chờ duyệt</option>
             <option value="Done" @selected(request('status') === 'Done')>Hoàn thành</option>
             <option value="Overdue" @selected(request('status') === 'Overdue')>Quá hạn</option>
         </select>

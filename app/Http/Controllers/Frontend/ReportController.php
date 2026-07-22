@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\frontend\CreateReport;
+use App\Http\Requests\Frontend\EditReportRequest;
 use App\Models\Weekly_report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $reports = Auth::user()->internProfile->weeklyReports()->get();
+        $reports = Auth::user()->internProfile->weeklyReports()->paginate(5);
         return view('frontend.intern.reports.reports', compact('reports'));
     }
 
@@ -90,15 +91,22 @@ class ReportController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $reports = Auth::user()->internProfile->weeklyReports()->findOrFail($id);
+
+        return view("frontend.intern.reports.editReport", compact('reports'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EditReportRequest $request, string $id)
     {
-        //
+        $report = Auth::user()->internProfile->weeklyReports()->findOrFail($id);
+
+
+        $report->update($request->validated());
+
+        return redirect()->route('frontend.intern.reports')->with('success', 'Cập nhật báo cáo thành công!');
     }
 
     /**

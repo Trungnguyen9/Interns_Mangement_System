@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $taskQuery = Auth::user()->internProfile->tasks();
 
         $totalTask = (clone $taskQuery)
-            ->where('status', '!=', 'Done')
+            ->whereNotIn('status', ['Done', 'Review'])
             ->count();
 
         $taskDoing = (clone $taskQuery)
@@ -53,7 +53,7 @@ class DashboardController extends Controller
             [
                 'icon' => 'fa-solid fa-list-check',
                 'color' => 'si-primary',
-                'label' => 'Tổng số task',
+                'label' => 'Tổng số task chưa làm',
                 'value' => $totalTask,
                 'sub' => 'Được giao cho bạn'
             ],

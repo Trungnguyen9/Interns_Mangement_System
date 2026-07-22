@@ -100,13 +100,17 @@ class TaskMnController extends Controller
      */
     public function update(UpdateTaskRequest $request, string $id)
     {
-
+        // dd($id);
 
         $mentor = Auth::user()->mentorProfile;
 
-        $task = $mentor->tasks()
-            ->where('id', $id)
-            ->firstOrFail();
+        $task = $mentor->tasks()->find($id);
+
+        if (!$task) {
+            return back()->withErrors([
+                'permission' => 'Task này không thuộc quyền quản lý của bạn.'
+            ]);
+        }
 
         $task->title = $request->title;
         $task->description = $request->description;

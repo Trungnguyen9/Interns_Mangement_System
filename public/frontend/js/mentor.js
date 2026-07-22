@@ -1,15 +1,4 @@
-/* ==========================================================================
-   IMS – Mentor Portal Scripts
-   public/js/mentor.js
 
-   Load AFTER intern.js (reuses openDetail/closeDetail pattern conventions).
-   ========================================================================== */
-
-/**
- * ----- Tasks page: click a kanban card to load it into the review panel -----
- * Server-rendered cards carry data-* attributes; clicking swaps the
- * review panel's bound fields without a full page reload.
- */
 function selectTask(card) {
 
   // Highlight task đang chọn 
@@ -82,7 +71,7 @@ function selectTask(card) {
 }
 
 /**
- * ----- Tasks page: "Giao task mới" modal -----
+ * Tasks page: Giao task mới 
  */
 function openCreateTaskModal() {
   const modal = document.getElementById('createTaskModal');
@@ -93,11 +82,7 @@ function closeCreateTaskModal() {
   if (modal) modal.classList.remove('open');
 }
 
-/**
- * ----- Intern detail page: open intern from roster table/list -----
- * Used when navigating from interns.blade.php to detail.blade.php via JS
- * (optional — normally just a Blade <a href>, kept here for SPA-like usage).
- */
+
 function viewInternDetail(internId) {
   window.location.href = '/mentor/interns/' + internId;
 }
@@ -114,11 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-/* ==========================================================================
-   tasks_kanban.blade.php — override selectTask để enable/disable
-   nút "Trả về Doing" và "Xác nhận Done" tuỳ status task.
-   Chỉ chạy khi 2 nút tồn tại trong trang (tức là đang ở kanban page).
-   ========================================================================== */
+
 (function () {
   const _base = window.selectTask;
 

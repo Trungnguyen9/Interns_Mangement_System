@@ -37,7 +37,7 @@
             </div>
             <div
                 style="display:flex;justify-content:space-between;font-size:12px;color:var(--c-text-sub);margin-bottom:16px">
-                <span>{{ $progress['percent'] ?? 50 }}% hoàn thành</span>
+                <span>{{ $progress['percent'] ?? 0 }}% hoàn thành</span>
                 <span style="color:var(--c-primary);font-weight:600">{{ (int) $progress['weeks_left'] }} tuần còn
                     lại</span>
             </div>

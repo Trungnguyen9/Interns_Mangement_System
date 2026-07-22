@@ -129,6 +129,14 @@
                     <i class="fa-solid fa-clock" style="margin-right:6px"></i> Mentor chưa nhận xét báo cáo này.
                 </div>
             @endif
+            @if (!$report->mentor_comment)
+                <a href="{{ route('frontend.intern.reports.edit', $report->id) }}" name="action" value="save"
+                    class="btn btn-outline">
+                    <i class="fa-solid fa-floppy-disk"></i> Cập nhật báo cáo
+                </a>
+            @endif
         </div>
     @endforeach
+    <div>{{ $reports->links('vendor.pagination.ims') }}</div>
+
 @endsection

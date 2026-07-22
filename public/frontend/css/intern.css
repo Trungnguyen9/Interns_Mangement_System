@@ -1066,6 +1066,15 @@ textarea.form-control {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
+.alert-success {
+  background: var(--c-success-l);
+  border: 1px solid #c6f6d5;
+  color: var(--c-success);
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+}
+
 .alert-danger {
   background-color: #fdf2f2;
   /* Nền đỏ hồng nhạt cực dịu mắt */

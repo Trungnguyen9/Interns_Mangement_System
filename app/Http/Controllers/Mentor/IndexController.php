@@ -20,7 +20,7 @@ class IndexController extends Controller
         $maxInterns = $mentor->max_interns;
 
 
-        $totalTasks = $mentor->tasks()->count();
+        $totalTasks = $mentor->tasks()->WhereNotIn('status', ['Done', 'Review'])->count();
 
         $reviewTasks = $mentor->tasks->where('status', 'Review')->count();
         $doneTasks = $mentor->tasks->where('status', 'Done')->count();

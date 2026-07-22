@@ -13,7 +13,7 @@ function toggleForm() {
   if (form.classList.contains('open')) {
     form.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-}
+} 
 
 /**
  * ----- Global: close modal when clicking outside of it -----

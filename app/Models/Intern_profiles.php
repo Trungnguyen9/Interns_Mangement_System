@@ -71,9 +71,14 @@ class Intern_profiles extends Model
         return $this->tasks()->where('status', 'Done')->count();
     }
 
+    public function getReviewTasksCountAttribute()
+    {
+        return $this->tasks()->where('status', 'Review')->count();
+    }
+
     public function getPendingTasksCountAttribute()
     {
-        return $this->total_tasks - $this->done_tasks_count;
+        return $this->total_tasks - $this->done_tasks_count - $this->review_tasks_count;
     }
 
     public function getOverdueTasksCountAttribute()

@@ -9,6 +9,20 @@
         <div class="page-sub">Báo cáo của intern bạn phụ trách</div>
     </div>
 
+    @if (session('success'))
+        <div class="alert alert-success" style="margin-bottom:16px">
+            <i class="fa-solid fa-circle-check"></i> {{ session('success') }}
+        </div>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     {{-- Toolbar --}}
     <form method="GET" action="{{ route('frontend.mentor.reports') }}" class="toolbar">
         @csrf

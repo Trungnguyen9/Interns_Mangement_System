@@ -50,10 +50,6 @@
     </div>
 
     {{-- ── Kanban board ── --}}
-    {{--
-        Dùng lại hoàn toàn .kanban / .kcol / .kcol-head / .kcol-count / .kcard
-        từ mentor.css — không thêm style mới cho phần này.
-    --}}
     <div class="kanban">
 
         {{-- Todo --}}
@@ -248,15 +244,12 @@
             </div>
 
             <div class="action-row">
-                {{-- Lưu thông tin (không đổi status) --}}
                 <button type="submit" name="action" value="save" class="btn btn-outline">
                     <i class="fa-solid fa-floppy-disk"></i> Lưu
                 </button>
-                {{-- Trả về Doing — chỉ active khi task đang ở Review --}}
                 <button type="submit" name="action" value="doing" class="btn btn-outline" id="btnReturnDoing">
                     <i class="fa-solid fa-rotate-left"></i> Trả về Doing
                 </button>
-                {{-- Xác nhận Done — chỉ active khi task đang ở Review --}}
                 <button type="submit" name="action" value="done" class="btn btn-primary" id="btnConfirmDone">
                     <i class="fa-solid fa-check"></i> Xác nhận Done
                 </button>
@@ -266,7 +259,6 @@
     </div>
 
     {{-- ── Modal: Giao task mới ── --}}
-    {{-- Dùng lại openCreateTaskModal() / closeCreateTaskModal() từ mentor.js --}}
     <div class="modal-overlay" id="createTaskModal">
         <div class="modal">
             <div class="modal-title">
@@ -279,7 +271,6 @@
             </div>
             <form method="POST" action="{{ route('frontend.mentor.tasks.store') }}">
                 @csrf
-                {{-- Truyền sẵn intern_id, mentor không cần chọn lại --}}
                 <input type="hidden" name="intern_id" value="{{ $intern->id }}">
 
                 <div class="form-group">

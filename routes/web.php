@@ -74,7 +74,6 @@ Route::prefix('adminpage')
         Route::get('/report', [ReportAdController::class, 'index'])->name('admin.reports.index');
         // detail
         Route::get('/report/show/{id}', [ReportAdController::class, 'show'])->name('admin.reports.show');
-        
     });
 
 Route::prefix('internpage')->middleware(['auth', CheckInternRole::class])->group(function () {
@@ -97,6 +96,9 @@ Route::prefix('internpage')->middleware(['auth', CheckInternRole::class])->group
     Route::get('reports', [ReportController::class, 'index'])->name('frontend.intern.reports');
     // add
     Route::post('reports/create', [ReportController::class, 'store'])->name('frontend.intern.reports.store');
+    //edit
+    Route::get('/reports/edit/{id}', [ReportController::class, 'edit'])->name('frontend.intern.reports.edit');
+    Route::post('/reports/edit/{id}', [ReportController::class, 'update']);
 });
 
 
