@@ -102,7 +102,7 @@
             <div class="intern-row"><span style="flex:1">Tuần 4 &middot; 26/05 - 30/05</span><span class="badge reviewed">Đã
                     duyệt</span></div>
         @endforelse
-        <div style="margin-top:10px"><a href="#"
+        <div style="margin-top:10px"><a href="{{ route('frontend.mentor.reports') }}"
                 style="font-size:12px;color:var(--c-primary);text-decoration:none">Xem tất cả báo cáo →</a></div>
         <div>{{ $weeklyReports->links('vendor.pagination.ims') }}</div>
 

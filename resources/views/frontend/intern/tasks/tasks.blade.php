@@ -117,7 +117,7 @@
         </table>
     </div>
 
-    <div>{{ $tasks->links('vendor.pagination.ims') }}</div>
+    <div>{{ $tasks->appends(request()->query())->links('vendor.pagination.ims') }}</div>
 
 
     {{-- Task detail modal --}}

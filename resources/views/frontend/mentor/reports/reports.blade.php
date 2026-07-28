@@ -119,6 +119,6 @@
 
 
     @endforelse
-    <div>{{ $reports->links('vendor.pagination.ims') }}</div>
+    <div>{{ $reports->appends(request()->query())->links('vendor.pagination.ims') }}</div>
 
 @endsection

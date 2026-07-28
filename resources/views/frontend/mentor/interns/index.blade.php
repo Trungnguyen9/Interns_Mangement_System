@@ -80,6 +80,6 @@
         </table>
     </div>
 
-    <div>{{ $interns->links('vendor.pagination.ims') }}</div>
+    <div>{{ $interns->appends(request()->query())->links('vendor.pagination.ims') }}</div>
 
 @endsection
