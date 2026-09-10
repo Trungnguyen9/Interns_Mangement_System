@@ -36,49 +36,44 @@ class IndexController extends Controller
         $totalPendingReports = $reportQuery->where('weekly_reports.status', 'pending')->count();
         $pendingReportsList = $reportQuery->where('weekly_reports.status', 'pending')->orderBy('updated_at')->take(5)->get();
 
-        $stats = [
+
+         $stats = [
             [
-                'icon' => 'fa-solid fa-users',
-                'color' => 'si-primary',
-                'label' => 'Interns phụ trách',
+                'title' => 'My Interns',
                 'value' => $currentInterns . ' / ' . $maxInterns,
-                'sub' => 'Slot hiện tại'
+                'icon'  => 'mdi mdi-account-multiple',
+                'color' => 'cyan',
             ],
 
             [
-                'icon' => 'fa-solid fa-list-check',
-                'color' => 'si-primary',
-                'label' => 'Tasks đã giao',
+                'title' => 'Assigned Tasks',
                 'value' => $totalTasks,
-                'sub' => 'Tổng cộng'
+                'icon'  => 'mdi mdi-format-list-bulleted',
+                'color' => 'info',
             ],
 
             [
-                'icon' => 'fa-solid fa-hourglass-half',
-                'color' => 'si-warning',
-                'label' => 'Tasks chờ duyệt',
+                'title' => 'Pending Tasks',
                 'value' => $reviewTasks,
-                'sub' => 'Task ở trạng thái review'
+                'icon'  => 'mdi mdi-timer-sand',
+                'color' => 'warning',
             ],
 
             [
-                'icon' => 'fa-solid fa-circle-check',
-                'color' => 'si-success',
-                'label' => 'Tasks hoàn thành',
+                'title' => 'Completed Tasks',
                 'value' => $doneTasks,
-                'sub' => 'Đã Done'
+                'icon'  => 'mdi mdi-check-circle',
+                'color' => 'success',
             ],
 
             [
-                'icon' => 'fa-solid fa-file-circle-exclamation',
-                'color' => 'si-danger',
-                'label' => 'Báo cáo chưa duyệt',
+                'title' => 'Pending Reports',
                 'value' => $totalPendingReports,
-                'sub' => 'Cần nhận xét'
-            ],
-
+                'icon'  => 'mdi mdi-file-outline',
+                'color' => 'danger',
+            ]
         ];
-        return view('frontend.mentor.dashboard', compact('stats', 'internsList', 'nearDeadlineTasks', 'pendingReportsList'));
+        return view('frontend_fn.mentor.dashboard.index', compact('stats', 'internsList', 'nearDeadlineTasks', 'pendingReportsList'));
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('admin.layout.app')
+@extends('frontend_fn.layout.app')
 @section('content')
     @if (session('success'))
         <div class="alert alert-success">
@@ -11,16 +11,16 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Trang tổng quan</h4>
+                <h4 class="page-title">Dashboard</h4>
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="#">Trang chủ</a>
+                                <a href="#">Home</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Trang tổng quan</li>
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                         </ol>
                     </nav>
                 </div>
@@ -38,7 +38,7 @@
         {{-- ============================================================== --}}
         <div class="row">
             @foreach ($stats as $stat)
-                <div class="col-md-6 col-lg-3 mb-4">
+                <div class="col-md-6 col-lg mb-4">
                     <div class="card shadow-sm h-100">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
@@ -61,15 +61,54 @@
         </div>
 
         {{-- ============================================================== --}}
-        {{-- SECTION 2: Danh sách Task gần deadline --}}
+        {{-- SECTION 2: Danh sách Task gần deadline và Interns phụ trách --}}
         {{-- ============================================================== --}}
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 col-lg-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="card-title mb-0">Task Gần Deadline</h4>
-                            <span class="text-muted" style="font-size:13px;">Sắp xếp theo hạn gần nhất</span>
+                            <h4 class="card-title mb-0">My Interns</h4>
+                        </div>
+                        <div class="table-responsive mt-2">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0">TASK</th>
+
+                                        <th class="border-top-0">STATUS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($internsList as $intern)
+                                        <tr>
+                                            <td class="txt-oflo">
+                                                <div>{{ $intern->full_name }}<div style="font-size: smaller">
+                                                        {{ $intern->desired_technology }}</div>
+                                            </td>
+
+                                            <td class="txt-oflo">{{ $intern->status }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="empty-hint">Không có task nào gần deadline</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                            <a href="{{ route('frontend.mentor.interns') }}">
+                                Show All
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="card-title mb-0">Tasks Nearing Deadline</h4>
+                            <span class="text-muted" style="font-size:13px;">Sort by Nearest Deadline</span>
                         </div>
                         <div class="table-responsive mt-2">
                             <table class="table table-hover">
@@ -79,16 +118,16 @@
                                         <th class="border-top-0">INTERN</th>
                                         <th class="border-top-0">MENTOR</th>
                                         <th class="border-top-0">DEADLINE</th>
-                                        <th class="border-top-0">THỜI GIAN CÒN LẠI</th>
-                                        <th class="border-top-0">TRẠNG THÁI</th>
+                                        <th class="border-top-0">TIME LEFT</th>
+                                        <th class="border-top-0">STATUS</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($nearDeadlineTasksList as $task)
+                                    @forelse ($nearDeadlineTasks as $task)
                                         <tr>
                                             <td class="txt-oflo">{{ $task->title }}</td>
                                             <td class="txt-oflo">
-                                                {{ $task->intern->full_name ?? '-' }}</td>
+                                                {{ $task->intern->full_name }}</td>
                                             <td class="txt-oflo">
                                                 {{ $task->intern->mentor->full_name ?? '-' }}
                                             </td>
@@ -150,6 +189,51 @@
                                         @endforelse
                                     </tbody>
                                 </table>
+                                <a href="{{ route('frontend.mentor.tasks') }}">
+                                    Show All
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {{-- ============================================================== --}}
+            {{-- SECTION 3: Danh sách Reports cần review --}}
+            {{-- ============================================================== --}}
+            <div class="row">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="card-title mb-0">Reports Pending Review</h4>
+                            </div>
+                            <div class="table-responsive mt-2">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0">INTERN</th>
+                                            <th class="border-top-0">TIME</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($pendingReportsList as $report)
+                                            <tr>
+                                                <td class="txt-oflo">
+                                                    {{ $report->intern->full_name }}</td>
+
+                                                <td class="txt-oflo">
+                                                    {{ \Carbon\Carbon::parse($report->week_start_date)->format('d/m/Y') . ' - ' . \Carbon\Carbon::parse($report->week_end_date)->format('d/m/Y') }}
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="6" class="empty-hint">Không có báo cáo cần được duyệt</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
                                 <a href="{{ route('admin.tasks.index') }}">
                                     Xem tất cả
                                 </a>
@@ -158,11 +242,10 @@
                     </div>
                 </div>
             </div>
-            {{-- ============================================================== --}}
-            {{-- END SECTION 3 --}}
-            {{-- ============================================================== --}}
 
         </div>
+
+
 
         <!-- ============================================================== -->
         <!-- footer -->
