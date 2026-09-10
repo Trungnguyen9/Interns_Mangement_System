@@ -58,7 +58,6 @@ File: scss
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --blue: #137eff;
   --indigo: #6610f2;
   --purple: #8b5edd;
   --pink: #e83e8c;
@@ -15417,3 +15416,6 @@ File: scss
   font-size: 12px;
   border-radius: 0px 0px 0px 5px;
 }
+
+
+/* INTERN */

@@ -76,6 +76,7 @@ Route::prefix('adminpage')
         Route::get('/report/show/{id}', [ReportAdController::class, 'show'])->name('admin.reports.show');
     });
 
+    
 Route::prefix('internpage')->middleware(['auth', CheckInternRole::class])->group(function () {
     // Dashboard
     Route::get('/dashboard', [FrontendDashboardController::class, 'index'])->name('frontend.intern');
