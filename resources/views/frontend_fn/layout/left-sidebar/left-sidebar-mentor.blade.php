@@ -13,38 +13,24 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/adminpage/account') }}"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/mentorpage/interns') }}"
                         aria-expanded="false">
                         <i class="mdi mdi-account-multiple"></i>
                         <span class="hide-menu">My Intern</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/adminpage/intern') }}"
-                        aria-expanded="false">
-                        <i class="mdi mdi-account-box"></i>
-                        <span class="hide-menu">Interns Management</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/adminpage/mentor') }}"
-                        aria-expanded="false">
-                        <i class="mdi mdi-account-box"></i>
-                        <span class="hide-menu">Mentors Management</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/adminpage/task') }}"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/mentorpage/tasks') }}"
                         aria-expanded="false">
                         <i class="mdi mdi-format-list-bulleted"></i>
                         <span class="hide-menu">Tasks Management</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/adminpage/report') }}"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('/mentorpage/reports') }}"
                         aria-expanded="false">
-                        <i class="mdi mdi-file-document-box"></i>
-                        <span class="hide-menu">Reports Management</span>
+                        <i class="mdi mdi-file-document"></i>
+                        <span class="hide-menu">Weekly Reports</span>
                     </a>
                 </li>
             </ul>

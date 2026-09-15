@@ -4,14 +4,14 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Quản lý Task</h4>
+                <h4 class="page-title">Tasks Management</h4>
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('/adminpage') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Task</li>
+                            <li class="breadcrumb-item active" aria-current="page">Tasks</li>
                         </ol>
                     </nav>
                 </div>
@@ -28,7 +28,7 @@
             <div class="col-md-3 col-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title m-b-0 ">Tổng task</h5>
+                        <h5 class="card-title m-b-0 ">Total Tasks</h5>
                         <h2 class="font-light m-b-0">{{ $stats['total'] ?? 0 }}</h2>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
             <div class="col-md-3 col-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title m-b-0 ">Đang làm</h5>
+                        <h5 class="card-title m-b-0 ">Doing</h5>
                         <h2 class="font-light m-b-0">{{ $stats['doing'] ?? 0 }}</h2>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
             <div class="col-md-3 col-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title m-b-0 ">Chờ review</h5>
+                        <h5 class="card-title m-b-0 ">Pending Reviews</h5>
                         <h2 class="font-light m-b-0">{{ $stats['review'] ?? 0 }}</h2>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
             <div class="col-md-3 col-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title m-b-0 text-danger">Quá hạn</h5>
+                        <h5 class="card-title m-b-0 text-danger">Overdue Tasks</h5>
                         <h2 class="font-light m-b-0 text-danger">{{ $stats['overdue'] ?? 0 }}</h2>
                     </div>
                 </div>
@@ -69,14 +69,14 @@
                         <form method="GET" action="{{ route('admin.tasks.index') }}">
                             <div class="row align-items-end">
                                 <div class="col-md-6 col-sm-12 form-group">
-                                    <label class="font-14 text-muted">Tìm kiếm</label>
+                                    <label class="font-14 text-muted">Search</label>
                                     <input type="text" name="q" value="{{ request('q') }}" class="form-control"
-                                        placeholder="Tên task, intern, mentor...">
+                                        placeholder="Task name, intern, mentor...">
                                 </div>
                                 <div class="col-md-2 col-sm-4 form-group">
                                     <label class="font-14 text-muted">Mentor</label>
                                     <select name="mentor_id" class="form-control">
-                                        <option value="">Tất cả</option>
+                                        <option value="">All</option>
                                         @foreach ($mentors as $mentor)
                                             <option value="{{ $mentor->id }}" @selected(request('mentor_id') == $mentor->id)>
                                                 {{ $mentor->user->name }}
@@ -87,7 +87,7 @@
                                 <div class="col-md-2 col-sm-4 form-group">
                                     <label class="font-14 text-muted">Intern</label>
                                     <select name="intern_id" class="form-control">
-                                        <option value="">Tất cả</option>
+                                        <option value="">All</option>
                                         @foreach ($interns as $intern)
                                             <option value="{{ $intern->id }}" @selected(request('intern_id') == $intern->id)>
                                                 {{ $intern->user->name }}
@@ -96,9 +96,9 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2 col-sm-4 form-group">
-                                    <label class="font-14 text-muted">Trạng thái</label>
+                                    <label class="font-14 text-muted">Status</label>
                                     <select name="status" class="form-control">
-                                        <option value="">Tất cả</option>
+                                        <option value="">All</option>
                                         <option value="todo" @selected(request('status') == 'todo')>Todo</option>
                                         <option value="doing" @selected(request('status') == 'doing')>Doing</option>
                                         <option value="review" @selected(request('status') == 'review')>Review</option>
@@ -109,22 +109,22 @@
 
                             <div class="row align-items-end">
                                 <div class="col-md-3 col-sm-6 form-group m-b-0">
-                                    <label class="font-14 text-muted">Deadline từ</label>
+                                    <label class="font-14 text-muted">Deadline: From</label>
                                     <input type="date" name="deadline_from" value="{{ request('deadline_from') }}"
                                         class="form-control">
                                 </div>
                                 <div class="col-md-3 col-sm-6 form-group m-b-0">
-                                    <label class="font-14 text-muted">Đến ngày</label>
+                                    <label class="font-14 text-muted">to</label>
                                     <input type="date" name="deadline_to" value="{{ request('deadline_to') }}"
                                         class="form-control">
                                 </div>
                                 <div class="col-md-6 form-group m-b-0">
                                     <div class="d-flex justify-content-end" style="gap: 8px;">
                                         <button type="submit" class="btn btn-info waves-effect waves-light">
-                                            <i class="fas fa-filter"></i> Lọc
+                                            <i class="fas fa-filter"></i> Filter
                                         </button>
                                         <a href="{{ route('admin.tasks.index') }}" class="btn btn-secondary">
-                                            <i class="fas fa-sync-alt"></i> Đặt lại
+                                            <i class="fas fa-sync-alt"></i> Reset
                                         </a>
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Danh sách task</h4>
+                        <h4 class="card-title">Tasks List</h4>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -151,8 +151,8 @@
                                     <th class="border-top-0">TASK</th>
                                     <th class="border-top-0">INTERN</th>
                                     <th class="border-top-0">MENTOR</th>
-                                    <th class="border-top-0">HẠN CHÓT</th>
-                                    <th class="border-top-0">TRẠNG THÁI</th>
+                                    <th class="border-top-0">DEADLINE</th>
+                                    <th class="border-top-0">STATUS</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -173,7 +173,7 @@
                                         <td class="txt-oflo">
                                             {{ \Carbon\Carbon::parse($task->deadline)->format('d/m/Y') ?? '—' }}
                                             @if ($task->is_overdue)
-                                                <span class="label label-danger label-rounded">Quá hạn</span>
+                                                <span class="label label-danger label-rounded">Overdue</span>
                                             @endif
                                         </td>
                                         <td>

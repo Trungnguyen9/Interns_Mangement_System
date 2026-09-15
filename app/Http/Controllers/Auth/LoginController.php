@@ -35,17 +35,17 @@ class LoginController extends Controller
 
             return redirect()
                 ->route('login')
-                ->with('error', 'Tài khoản của bạn đã bị vô hiệu hóa');
+                ->with('error', 'Your account has been disabled.');
         }
 
         if ($user->id_role == '1') {
-            return redirect()->route('admin.index')->with('success', 'Đăng nhập trang quản trị thành công');;
+            return redirect()->route('admin.index')->with('success', 'Admin login successful.');;
         }
         if ($user->id_role == '2') {
-            return redirect()->route('frontend.mentor')->with('success', 'Đăng nhập trang người dùng thành công');
+            return redirect()->route('frontend.mentor')->with('success', 'Mentor login successful.');
         }
         if ($user->id_role == '3') {
-            return redirect()->route('frontend.intern')->with('success', 'Đăng nhập trang thực tập sinh thành công');
+            return redirect()->route('frontend.intern')->with('success', 'Intern login successful.');
         }
     }
     /**

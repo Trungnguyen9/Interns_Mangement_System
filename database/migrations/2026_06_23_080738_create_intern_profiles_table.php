@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('desired_technology')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->string('status')->default('Đang thực tập');
+            $table->string('status')->default('Ongoing Interns');
             $table->foreignId('mentor_id')->nullable()->constrained('mentor_profiles')->onDelete('set null'); 
 
             $table->timestamps();

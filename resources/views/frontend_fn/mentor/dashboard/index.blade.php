@@ -91,7 +91,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="6" class="empty-hint">Không có task nào gần deadline</td>
+                                            <td colspan="6" class="empty-hint">No interns found</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -141,12 +141,12 @@
                                                         : null;
                                                 @endphp
                                                 @if (!is_null($daysLeft) && $daysLeft <= 1)
-                                                    <span class="dashboard-deadline-badge badge-deadline-urgent">Còn
-                                                        {{ (int) $daysLeft }} ngày</span>
+                                                    <span class="dashboard-deadline-badge badge-deadline-urgent">
+                                                        {{ (int) $daysLeft }} Days left</span>
                                                 @else
-                                                    <span class="dashboard-deadline-badge badge-deadline-soon">Còn
+                                                    <span class="dashboard-deadline-badge badge-deadline-soon">
                                                         {{ (int) $daysLeft }}
-                                                        ngày</span>
+                                                        Days left</span>
                                                 @endif
                                             </td>
                                             <td>
@@ -184,7 +184,7 @@
                                         </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="6" class="empty-hint">Không có task nào gần deadline</td>
+                                                <td colspan="6" class="empty-hint">No tasks near deadline</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
@@ -234,8 +234,8 @@
                                         @endforelse
                                     </tbody>
                                 </table>
-                                <a href="{{ route('admin.tasks.index') }}">
-                                    Xem tất cả
+                                <a href="{{ route('frontend.mentor.reports') }}">
+                                    Show All
                                 </a>
                             </div>
                         </div>
