@@ -54,10 +54,10 @@
                                     placeholder="Search by name or email" value="{{ request('search') }}">
                                 <select name="status" class="form-control">
                                     <option value="">All Status</option>
-                                    <option value="Đang thực tập"
-                                        {{ request('status') == 'Đang thực tập' ? 'selected' : '' }}>Đang thực tập</option>
-                                    <option value="Đã hoàn thành"
-                                        {{ request('status') == 'Đã hoàn thành' ? 'selected' : '' }}>Đã hoàn thành</option>
+                                    <option value="Ongoing Interns"
+                                        {{ request('status') == 'Ongoing Interns' ? 'selected' : '' }}>Ongoing Interns</option>
+                                    <option value="Completed Interns"
+                                        {{ request('status') == 'Completed Interns' ? 'selected' : '' }}>Completed Interns</option>
                                 </select>
                                 <select name="mentor_id" class="form-control">
                                     <option value="">All Mentors</option>

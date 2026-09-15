@@ -4,7 +4,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Chi tiết báo cáo tuần</h4>
+                <h4 class="page-title">Weekly Report Details</h4>
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
@@ -24,8 +24,8 @@
 
         @php
             $statusMap = [
-                'pending' => ['Chờ duyệt', 'warning'],
-                'reviewed' => ['Đã duyệt', 'success'],
+                'pending' => ['Pending', 'warning'],
+                'reviewed' => ['Reviewed', 'success'],
             ];
             [$statusLabel, $statusColor] = $statusMap[$report->status] ?? ['—', 'default'];
         @endphp
@@ -55,20 +55,20 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-muted">Tuần báo cáo</td>
+                                    <td class="text-muted">Week</td>
                                     <td class="text-right font-medium">
                                         {{ \Carbon\Carbon::parse($report->week_start_date)->format('d/m/Y') }} -
                                         {{ \Carbon\Carbon::parse($report->week_end_date)->format('d/m/Y') }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-muted">Ngày nộp</td>
+                                    <td class="text-muted">Submission Date</td>
                                     <td class="text-right font-medium">
                                         {{ optional($report->created_at)->format('d/m/Y H:i') ?? '—' }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-muted">Trạng thái</td>
+                                    <td class="text-muted">Status</td>
                                     <td class="text-right">
                                         <span
                                             class="label label-{{ $statusColor }} label-rounded">{{ $statusLabel }}</span>
@@ -78,7 +78,7 @@
                         </table>
 
                         <a href="{{ route('admin.reports.index') }}" class="btn btn-secondary btn-block m-t-10">
-                            <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                            <i class="fas fa-arrow-left"></i>Back
                         </a>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">
-                            <i class="fas fa-check-circle text-success"></i> Công việc đã hoàn thành
+                            <i class="fas fa-check-circle text-success"></i>Completed Tasks
                         </h4>
                         <p class="m-b-0" style="white-space: pre-line;">{{ $report->completed_tasks }}</p>
                     </div>
@@ -101,12 +101,12 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">
-                            <i class="fas fa-exclamation-triangle text-warning"></i> Khó khăn gặp phải
+                            <i class="fas fa-exclamation-triangle text-warning"></i>Difficulties
                         </h4>
                         @if ($report->difficulties)
                             <p class="m-b-0" style="white-space: pre-line;">{{ $report->difficulties }}</p>
                         @else
-                            <p class="m-b-0 text-muted">Không có.</p>
+                            <p class="m-b-0 text-muted">Nothing</p>
                         @endif
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">
-                            <i class="fas fa-flag text-info"></i> Kế hoạch tuần tới
+                            <i class="fas fa-flag text-info"></i>Next Week's Plan
                         </h4>
                         <p class="m-b-0" style="white-space: pre-line;">{{ $report->next_plan }}</p>
                     </div>
@@ -124,7 +124,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">
-                                <i class="fas fa-link text-muted"></i> Tài liệu tham khảo
+                                <i class="fas fa-link text-muted"></i>References
                             </h4>
                             @foreach (explode(',', $report->reference_links) as $link)
                                 <a href="{{ trim($link) }}" target="_blank" class="link-chip"><i class="fa-solid fa-link"
@@ -137,12 +137,12 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">
-                            <i class="fas fa-comment-dots text-primary"></i> Nhận xét của mentor
+                            <i class="fas fa-comment-dots text-primary"></i>Mentor's Comment
                         </h4>
                         @if ($report->mentor_comment)
                             <p class="m-b-0" style="white-space: pre-line;">{{ $report->mentor_comment }}</p>
                         @else
-                            <p class="m-b-0 text-muted">Mentor chưa để lại nhận xét.</p>
+                            <p class="m-b-0 text-muted">No Comments from Mentor Yet</p>
                         @endif
                     </div>
                 </div>

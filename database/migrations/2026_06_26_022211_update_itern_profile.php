@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('intern_profiles', function (Blueprint $table) {
-            $table->enum('status', ['Đang thực tập', 'Đã hoàn thành'])->default('Đang thực tập')->change();
+            $table->enum('status', ['Ongoing Interns', 'Completed Interns'])->default('Ongoing Interns')->change();
         });
     }
 

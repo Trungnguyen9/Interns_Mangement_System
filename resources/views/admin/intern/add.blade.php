@@ -125,8 +125,8 @@
                                 <label class="col-md-12">Status <span class="text-danger">*</span></label>
                                 <div class="col-md-12">
                                     <select name="status" class="form-control form-control-line">
-                                        <option value="Đang thực tập">Đang thực tập</option>
-                                        <option value="Đã hoàn thành">Đã hoàn thành</option>
+                                        <option value="Đang thực tập">Ongoing Interns</option>
+                                        <option value="Đã hoàn thành">Completed Interns</option>
                                     </select>
                                 </div>
                             </div>

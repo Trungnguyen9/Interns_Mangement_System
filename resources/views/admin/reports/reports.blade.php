@@ -4,7 +4,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Quản lý Báo cáo</h4>
+                <h4 class="page-title">Reports Management</h4>
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
@@ -28,7 +28,7 @@
             <div class="col-md-3 col-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title m-b-0 text-muted">Tổng báo cáo</h5>
+                        <h5 class="card-title m-b-0 text-muted">Total Reports</h5>
                         <h2 class="font-light m-b-0">{{ $stats['total'] ?? 0 }}</h2>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
             <div class="col-md-3 col-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title m-b-0 text-muted">Đã nộp tuần này</h5>
+                        <h5 class="card-title m-b-0 text-muted">Submitted This Week</h5>
                         <h2 class="font-light m-b-0">{{ $stats['this_week'] ?? 0 }}</h2>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
             <div class="col-md-3 col-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title m-b-0 text-muted">Chờ mentor duyệt</h5>
+                        <h5 class="card-title m-b-0 text-muted">Pending Review</h5>
                         <h2 class="font-light m-b-0">{{ $stats['pending'] ?? 0 }}</h2>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
             <div class="col-md-3 col-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title m-b-0 text-muted">Đã duyệt</h5>
+                        <h5 class="card-title m-b-0 text-muted">Reviewed</h5>
                         <h2 class="font-light m-b-0">{{ $stats['reviewed'] ?? 0 }}</h2>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                             <div class="col-md-2 col-sm-6 form-group m-b-0">
                                 <label class="font-14 text-muted">Mentor</label>
                                 <select name="mentor_id" class="form-control">
-                                    <option value="">Tất cả</option>
+                                    <option value="">All</option>
                                     @foreach ($mentors as $mentor)
                                         <option value="{{ $mentor->id }}" @selected(request('mentor_id') == $mentor->id)>
                                             {{ $mentor->user->name }}
@@ -81,7 +81,7 @@
                             <div class="col-md-2 col-sm-6 form-group m-b-0">
                                 <label class="font-14 text-muted">Intern</label>
                                 <select name="intern_id" class="form-control">
-                                    <option value="">Tất cả</option>
+                                    <option value="">All</option>
                                     @foreach ($interns as $intern)
                                         <option value="{{ $intern->id }}" @selected(request('intern_id') == $intern->id)>
                                             {{ $intern->user->name }}
@@ -90,16 +90,16 @@
                                 </select>
                             </div>
                             <div class="col-md-2 col-sm-6 form-group m-b-0">
-                                <label class="font-14 text-muted">Trạng thái</label>
+                                <label class="font-14 text-muted">Status</label>
                                 <select name="status" class="form-control">
-                                    <option value="">Tất cả</option>
-                                    <option value="pending" @selected(request('status') == 'pending')>Chờ duyệt</option>
-                                    <option value="reviewed" @selected(request('status') == 'reviewed')>Đã duyệt</option>
+                                    <option value="">All</option>
+                                    <option value="pending" @selected(request('status') == 'pending')>Pending</option>
+                                    <option value="reviewed" @selected(request('status') == 'reviewed')>Reviewed</option>
                                 </select>
                             </div>
                             <div class="col-md-2 form-group m-b-0">
                                 <button type="submit" class="btn btn-info btn-block waves-effect waves-light">
-                                    <i class="fas fa-filter"></i> Lọc
+                                    <i class="fas fa-filter"></i> filter
                                 </button>
                             </div>
                         </form>
@@ -115,26 +115,26 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Danh sách báo cáo tuần</h4>
+                        <h4 class="card-title">Weekly Reports List</h4>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th class="border-top-0">TUẦN</th>
+                                    <th class="border-top-0">WEEK</th>
                                     <th class="border-top-0">INTERN</th>
                                     <th class="border-top-0">MENTOR</th>
-                                    <th class="border-top-0">NGÀY NỘP</th>
-                                    <th class="border-top-0">TRẠNG THÁI</th>
-                                    <th class="border-top-0">THAO TÁC</th>
+                                    <th class="border-top-0">SUBMISSION DATE</th>
+                                    <th class="border-top-0">STATUS</th>
+                                    <th class="border-top-0">ACTIONS</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($reports as $report)
                                     @php
                                         $statusMap = [
-                                            'pending' => ['Chờ duyệt', 'warning'],
-                                            'reviewed' => ['Đã duyệt', 'success'],
+                                            'pending' => ['Pending', 'warning'],
+                                            'reviewed' => ['Reviewed', 'success'],
                                         ];
                                         [$statusLabel, $statusColor] = $statusMap[$report->status] ?? ['—', 'default'];
                                     @endphp
@@ -155,13 +155,13 @@
                                         <td>
                                             <a href="{{ route('admin.reports.show', $report->id) }}"
                                                 class="btn btn-info btn-sm">
-                                                <i class="fas fa-eye"></i> Xem
+                                                <i class="fas fa-eye"></i> Show
                                             </a>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6" class="text-center text-muted p-4">Không có báo cáo nào phù hợp.
+                                        <td colspan="6" class="text-center text-muted p-4">No reports found
                                         </td>
                                     </tr>
                                 @endforelse

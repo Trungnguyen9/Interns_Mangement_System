@@ -112,13 +112,13 @@
                                 <label class="col-md-12">Status <span class="text-danger">*</span></label>
                                 <div class="col-md-12">
                                     <select name="status" class="form-control form-control-line">
-                                        <option value="Đang thực tập" @if ($intern->status == 'Đang thực tập') selected @endif>
-                                            Đang thực tập
+                                        <option value="Ongoing Interns" @if ($intern->status == 'Ongoing Interns') selected @endif>
+                                            Ongoing Interns
                                         </option>
 
 
-                                        <option value="Đã hoàn thành" @if ($intern->status == 'Đã hoàn thành') selected @endif>
-                                            Đã hoàn thành
+                                        <option value="Completed Interns" @if ($intern->status == 'Completed Interns') selected @endif>
+                                            Completed Interns
                                         </option>
                                     </select>
                                 </div>

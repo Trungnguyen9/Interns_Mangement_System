@@ -11,16 +11,16 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Trang tổng quan</h4>
+                <h4 class="page-title">Dashboard</h4>
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="#">Trang chủ</a>
+                                <a href="#">Home</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Trang tổng quan</li>
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                         </ol>
                     </nav>
                 </div>
@@ -68,8 +68,8 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="card-title mb-0">Task Gần Deadline</h4>
-                            <span class="text-muted" style="font-size:13px;">Sắp xếp theo hạn gần nhất</span>
+                            <h4 class="card-title mb-0">Tasks Nearing Deadline</h4>
+                            <span class="text-muted" style="font-size:13px;">Sort by Nearest Deadline</span>
                         </div>
                         <div class="table-responsive mt-2">
                             <table class="table table-hover">
@@ -79,8 +79,8 @@
                                         <th class="border-top-0">INTERN</th>
                                         <th class="border-top-0">MENTOR</th>
                                         <th class="border-top-0">DEADLINE</th>
-                                        <th class="border-top-0">THỜI GIAN CÒN LẠI</th>
-                                        <th class="border-top-0">TRẠNG THÁI</th>
+                                        <th class="border-top-0">TIME LEFT</th>
+                                        <th class="border-top-0">STATUS</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -102,12 +102,12 @@
                                                         : null;
                                                 @endphp
                                                 @if (!is_null($daysLeft) && $daysLeft <= 1)
-                                                    <span class="dashboard-deadline-badge badge-deadline-urgent">Còn
-                                                        {{ (int) $daysLeft }} ngày</span>
+                                                    <span class="dashboard-deadline-badge badge-deadline-urgent">
+                                                        {{ (int) $daysLeft }} Days left</span>
                                                 @else
-                                                    <span class="dashboard-deadline-badge badge-deadline-soon">Còn
+                                                    <span class="dashboard-deadline-badge badge-deadline-soon">
                                                         {{ (int) $daysLeft }}
-                                                        ngày</span>
+                                                        Days left</span>
                                                 @endif
                                             </td>
                                             <td>
@@ -145,13 +145,13 @@
                                         </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="6" class="empty-hint">Không có task nào gần deadline</td>
+                                                <td colspan="6" class="empty-hint">No tasks near deadline</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
                                 <a href="{{ route('admin.tasks.index') }}">
-                                    Xem tất cả
+                                    Show all
                                 </a>
                             </div>
                         </div>

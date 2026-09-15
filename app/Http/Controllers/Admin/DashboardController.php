@@ -66,56 +66,56 @@ class DashboardController extends Controller
 
         $stats = [
             [
-                'title' => 'Tổng số Mentor',
+                'title' => 'Total Mentors',
                 'value' => $totalMentors,
                 'icon'  => 'ti-crown',
                 'color' => 'purple',
             ],
 
             [
-                'title' => 'Tổng số Intern',
+                'title' => 'Total Interns',
                 'value' => $totalInterns,
                 'icon'  => 'mdi mdi-account-card-details',
                 'color' => 'info',
             ],
 
             [
-                'title' => 'Đang thực tập',
+                'title' => 'Ongoing Interns',
                 'value' => $ongoingInterns,
                 'icon'  => 'mdi mdi-av-timer',
                 'color' => 'cyan',
             ],
 
             [
-                'title' => 'Báo cáo chưa review',
+                'title' => 'Pending Reports',
                 'value' => $pendingReports,
                 'icon'  => 'ti-file',
                 'color' => 'warning',
             ],
 
             [
-                'title' => 'Tổng số Task',
+                'title' => 'Total Tasks',
                 'value' => $totalTasks,
                 'icon'  => 'ti-clipboard',
                 'color' => 'primary',
             ],
 
             [
-                'title' => 'Task chờ review',
+                'title' => 'Pending Tasks',
                 'value' => $pendingReviewTasks,
                 'icon'  => 'ti-eye',
                 'color' => 'orange',
             ],
 
             [
-                'title' => 'Task đã hoàn thành',
+                'title' => 'Completed Tasks',
                 'value' => $completedTasks,
                 'icon'  => 'ti-check',
                 'color' => 'success',
             ],
 
             [
-                'title' => 'Task gần deadline',
+                'title' => 'Tasks Nearing Deadline',
                 'value' => $nearDeadlineTasksCount,
                 'icon'  => 'ti-alarm-clock',
                 'color' => 'danger',
