@@ -59,7 +59,7 @@ class CreateReport extends FormRequest
 
                     foreach ($links as $link) {
                         if (!filter_var($link, FILTER_VALIDATE_URL)) {
-                            $fail("Link '{$link}' không phải là URL hợp lệ.");
+                            $fail("Link '{$link}' is not a valid URL.");
                         }
                     }
                 },
@@ -73,22 +73,22 @@ class CreateReport extends FormRequest
     public function messages(): array
     {
         return [
-            'week_start_date.required' => 'Vui lòng chọn ngày bắt đầu.',
-            'week_start_date.date' => 'Ngày bắt đầu không hợp lệ.',
+            'week_start_date.required' => 'Please select a start date.',
+            'week_start_date.date' => 'The start date is invalid.',
 
-            'week_end_date.required' => 'Vui lòng chọn ngày kết thúc.',
-            'week_end_date.date' => 'Ngày kết thúc không hợp lệ.',
-            'week_end_date.after_or_equal' => 'Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu.',
+            'week_end_date.required' => 'Please select an end date.',
+            'week_end_date.date' => 'The end date is invalid.',
+            'week_end_date.after_or_equal' => 'The end date must be greater than or equal to the start date.',
 
-            'completed_tasks.required' => 'Vui lòng nhập công việc đã hoàn thành.',
-            'completed_tasks.max' => 'Công việc đã hoàn thành không được vượt quá 3000 ký tự.',
+            'completed_tasks.required' => 'Please enter completed tasks.',
+            'completed_tasks.max' => 'Completed tasks must not exceed 3000 characters.',
 
-            'difficulties.max' => 'Phần khó khăn không được vượt quá 2000 ký tự.',
+            'difficulties.max' => 'Difficulties must not exceed 2000 characters.',
 
-            'next_plan.required' => 'Vui lòng nhập kế hoạch tuần sau.',
-            'next_plan.max' => 'Kế hoạch tuần sau không được vượt quá 3000 ký tự.',
+            'next_plan.required' => 'Please enter the next week plan.',
+            'next_plan.max' => 'The next week plan must not exceed 3000 characters.',
 
-            'reference_links.max' => 'Link tham khảo không được vượt quá 1000 ký tự.',
+            'reference_links.max' => 'Reference links must not exceed 1000 characters.',
         ];
     }
-}
+} 

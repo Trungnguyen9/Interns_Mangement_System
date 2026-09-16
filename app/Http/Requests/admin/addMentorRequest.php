@@ -20,7 +20,7 @@ class addMentorRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules(): array 
     {
         return [
             'name'               => 'required|string|max:255|unique:users,name',
@@ -35,16 +35,16 @@ class addMentorRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required'               => 'Vui lòng nhập Tên tài khoản.',
-            'name.unique'                 => 'Tên tài khoản này đã tồn tại.',
-            'email.required'              => 'Vui lòng nhập địa chỉ Email.',
-            'email.email'                 => 'Định dạng Email không hợp lệ.',
-            'email.unique'                => 'Email này đã được đăng ký.',
-            'password.required'           => 'Vui lòng nhập Mật khẩu.',
-            'password.min'                => 'Mật khẩu phải có ít nhất :min ký tự.',
-            'password.confirmed'          => 'Xác nhận mật khẩu không trùng khớp.',
-            'max_interns.integer'          => 'Số lượng sinh viên thực tập phải là một số nguyên.',
-            'max_interns.min'              => 'Số lượng sinh viên thực tập phải lớn hơn hoặc bằng 1.',
+            'name.required'               => 'Please enter the account name.',
+            'name.unique'                 => 'This account name already exists.',
+            'email.required'              => 'Please enter an email address.',
+            'email.email'                 => 'The email format is invalid.',
+            'email.unique'                => 'This email is already registered.',
+            'password.required'           => 'Please enter a password.',
+            'password.min'                => 'The password must be at least :min characters long.',
+            'password.confirmed'          => 'Password confirmation does not match.',
+            'max_interns.integer'          => 'The number of interns must be an integer.',
+            'max_interns.min'              => 'The number of interns must be at least 1.',
         ];
     }
 }

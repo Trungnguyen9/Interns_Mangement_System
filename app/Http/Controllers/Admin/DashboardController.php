@@ -30,7 +30,7 @@ class DashboardController extends Controller
         $totalInterns = (clone $internQ)->count();
 
         $ongoingInterns = (clone $internQ)
-            ->where('status', 'Đang thực tập')
+            ->where('status', 'Ongoing Interns')
             ->count();
 
         $totalMentors = (clone $mentorQ)->count();

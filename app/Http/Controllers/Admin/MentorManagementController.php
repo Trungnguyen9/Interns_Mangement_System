@@ -103,17 +103,17 @@ class MentorManagementController extends Controller
             return redirect('adminpage/mentor')
                 ->with(
                     'success',
-                    'Thêm mentor thành công'
+                    'Mentor added successfully.'
                 );
         } catch (\Exception $e) {
             DB::rollBack();
 
-            // Ghi lại lỗi vào file log (storage/logs/laravel.log) để tiện mở lên xem khi code bị lỗi
-            Log::error('Lỗi khi thêm Mentor: ' . $e->getMessage());
+            // Log the error to storage/logs/laravel.log so it can be reviewed during debugging.
+            Log::error('Error while adding Mentor: ' . $e->getMessage());
 
             return back()
                 ->withInput()
-                ->with('error', 'Có lỗi xảy ra trong quá trình xử lý. Vui lòng thử lại.');
+                ->with('error', 'An error occurred while processing. Please try again.');
         }
     }
 
@@ -147,7 +147,7 @@ class MentorManagementController extends Controller
             $user = $mentor->user;
 
             if (!$user) {
-                throw new \Exception('Không tìm thấy User');
+                throw new \Exception('User not found.');
             }
 
 
@@ -168,13 +168,13 @@ class MentorManagementController extends Controller
             DB::commit();
 
             return redirect('adminpage/mentor')
-                ->with('success', 'Cập nhật mentor thành công');
+                ->with('success', 'Mentor updated successfully.');
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('Lỗi khi cập nhật Mentor: ' . $e->getMessage());
+            Log::error('Error while updating Mentor: ' . $e->getMessage());
             return back()
                 ->withInput()
-                ->with('error', 'Có lỗi xảy ra trong quá trình xử lý. Vui lòng thử lại.');
+                ->with('error', 'An error occurred while processing. Please try again.');
         }
     }
 

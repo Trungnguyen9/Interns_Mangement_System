@@ -43,7 +43,7 @@ class ReportController extends Controller
             return back()
                 ->withInput()
                 ->withErrors([
-                    'week_start_date' => 'Khoảng thời gian báo cáo phải nằm trong thời gian thực tập.'
+                    'week_start_date' => 'The report period must fall within the internship period.'
                 ]);
         }
 
@@ -59,7 +59,7 @@ class ReportController extends Controller
             return back()
                 ->withInput()
                 ->withErrors([
-                    'week_start_date' => 'Bạn đã nộp báo cáo cho khoảng thời gian này / khoảng thời gian này chồng lấn với báo cáo đã nộp trước đó.'
+                    'week_start_date' => 'You have already submitted a report for this period, or it overlaps with a previously submitted report.'
                 ]);
         }
 
@@ -75,7 +75,7 @@ class ReportController extends Controller
 
         return redirect()
             ->route('frontend.intern.reports')
-            ->with('success', 'Nộp báo cáo thành công.');
+            ->with('success', 'Report submitted successfully.');
     }
 
     /**
@@ -106,7 +106,7 @@ class ReportController extends Controller
 
         $report->update($request->validated());
 
-        return redirect()->route('frontend.intern.reports')->with('success', 'Cập nhật báo cáo thành công!');
+        return redirect()->route('frontend.intern.reports')->with('success', 'Report updated successfully!');
     }
 
     /**

@@ -71,7 +71,7 @@ class ProfilesController extends Controller
             $user = $intern->user;
 
             if (!$user) {
-                throw new \Exception('Không tìm thấy User');
+                throw new \Exception('User not found.');
             }
 
 
@@ -93,13 +93,13 @@ class ProfilesController extends Controller
             DB::commit();
 
             return redirect('internpage/profile')
-                ->with('success', 'Cập nhật intern thành công');
+                ->with('success', 'Intern profile updated successfully.');
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('Lỗi khi cập nhật Intern: ' . $e->getMessage());
+            Log::error('Error while updating Intern profile: ' . $e->getMessage());
             return back()
                 ->withInput()
-                ->with('error', 'Có lỗi xảy ra trong quá trình xử lý. Vui lòng thử lại.');
+                ->with('error', 'An error occurred while processing. Please try again.');
         }
     }
 

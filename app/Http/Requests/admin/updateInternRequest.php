@@ -44,30 +44,30 @@ class updateInternRequest extends FormRequest
             'academic_year'      => 'nullable|string|max:50',
             'desired_technology' => 'nullable|string|max:255',
             'start_date'         => 'required|date',
-            'end_date'           => 'required|date|after_or_equal:start_date', // Ngày kết thúc phải sau hoặc bằng ngày bắt đầu
-            'status'             => 'required|in:Đang thực tập,Đã hoàn thành',
+            'end_date'           => 'required|date|after_or_equal:start_date', // The end date must be greater than or equal to the start date.
+            'status'             => 'required|in:Ongoing Interns,Completed Interns',
             'mentor_id'          => 'nullable|exists:mentor_profiles,id',
         ];
     }
     public function messages(): array
-    {
+    { 
         return [
-            'name.required'               => 'Vui lòng nhập Tên tài khoản.',
-            'name.unique'                 => 'Tên tài khoản này đã tồn tại.',
-            'name.max'                    => 'Tên tài khoản không được vượt quá 255 ký tự.',
-            'full_name.max'               => 'Họ và tên không được vượt quá 255',
-            'email.required'              => 'Vui lòng nhập địa chỉ Email.',
-            'email.email'                 => 'Định dạng Email không hợp lệ.',
-            'email.max'                   => 'Email không được vượt quá 255 ký tự.',
-            'email.unique'                => 'Email này đã được đăng ký.',
-            'start_date.required'         => 'Vui lòng chọn Ngày bắt đầu.',
-            'start_date.date'             => 'Ngày bắt đầu không đúng định dạng ngày tháng.',
-            'end_date.required'           => 'Vui lòng chọn Ngày kết thúc.',
-            'end_date.date'               => 'Ngày kết thúc không đúng định dạng ngày tháng.',
-            'end_date.after_or_equal'     => 'Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu.',
-            'status.required'             => 'Vui lòng chọn Trạng thái.',
-            'status.in'                   => 'Trạng thái không hợp lệ.',
-            'mentor_id.exists'            => 'Mentor được chọn không tồn tại trong hệ thống.',
+            'name.required'               => 'Please enter the account name.',
+            'name.unique'                 => 'This account name already exists.',
+            'name.max'                    => 'The account name must not exceed 255 characters.',
+            'full_name.max'               => 'The full name must not exceed 255 characters.',
+            'email.required'              => 'Please enter an email address.',
+            'email.email'                 => 'The email format is invalid.',
+            'email.max'                   => 'The email must not exceed 255 characters.',
+            'email.unique'                => 'This email is already registered.',
+            'start_date.required'         => 'Please select a start date.',
+            'start_date.date'             => 'The start date is not in a valid date format.',
+            'end_date.required'           => 'Please select an end date.',
+            'end_date.date'               => 'The end date is not in a valid date format.',
+            'end_date.after_or_equal'     => 'The end date must be greater than or equal to the start date.',
+            'status.required'             => 'Please select a status.',
+            'status.in'                   => 'The selected status is invalid.',
+            'mentor_id.exists'            => 'The selected mentor does not exist in the system.',
         ];
     }
 }

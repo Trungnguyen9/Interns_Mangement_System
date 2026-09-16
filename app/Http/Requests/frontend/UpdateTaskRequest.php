@@ -71,22 +71,22 @@ class UpdateTaskRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'Vui lòng nhập tiêu đề task.',
-            'title.max' => 'Tiêu đề không được vượt quá 255 ký tự.',
+            'title.required' => 'Please enter the task title.',
+            'title.max' => 'The title must not exceed 255 characters.',
 
-            'description.string' => 'Mô tả không hợp lệ.',
+            'description.string' => 'Invalid description.',
 
-            'deadline.required' => 'Vui lòng chọn deadline.',
-            'deadline.date' => 'Deadline không hợp lệ.',
-            'deadline.after_or_equal' => 'Deadline không được nhỏ hơn ngày hiện tại.',
+            'deadline.required' => 'Please select a deadline.',
+            'deadline.date' => 'Invalid deadline.',
+            'deadline.after_or_equal' => 'The deadline cannot be earlier than the current date.',
 
-            'priority.required' => 'Vui lòng chọn mức ưu tiên.',
-            'priority.in' => 'Mức ưu tiên không hợp lệ.',
+            'priority.required' => 'Please select a priority level.',
+            'priority.in' => 'Invalid priority level.',
 
-            'mentor_comment.max' => 'Nhận xét không được vượt quá 1000 ký tự.',
+            'mentor_comment.max' => 'Comments must not exceed 1000 characters.',
 
-            'action.required' => 'Thao tác không hợp lệ.',
-            'action.in' => 'Thao tác không hợp lệ.',
+            'action.required' => 'Invalid action.',
+            'action.in' => 'Invalid action.',
         ];
     }
 }

@@ -32,7 +32,7 @@ class InternManagementController extends Controller
             });
         }
         // filter by status 
-        if ($request->filled('status') && in_array($request->status, ['Đang thực tập', 'Đã hoàn thành'])) {
+        if ($request->filled('status') && in_array($request->status, ['Ongoing Interns', 'Completed Interns'])) {
             $query->where('status', $request->status);
         }
         // filter by mentor
@@ -68,7 +68,7 @@ class InternManagementController extends Controller
                 ->withInput()
                 ->with(
                     'error',
-                    'Mentor này đã đạt số lượng intern tối đa.'
+                    'This mentor has reached the maximum number of interns.'
                 );
         }
 
@@ -103,17 +103,17 @@ class InternManagementController extends Controller
             return redirect('adminpage/intern')
                 ->with(
                     'success',
-                    'Thêm intern thành công'
+                    'Intern added successfully.'
                 );
         } catch (\Exception $e) {
             DB::rollBack();
 
-            // Ghi lại lỗi vào file log (storage/logs/laravel.log) để tiện mở lên xem khi code bị lỗi
-            Log::error('Lỗi khi thêm Intern: ' . $e->getMessage());
+            // Log the error to storage/logs/laravel.log so it can be reviewed during debugging.
+            Log::error('Error while adding Intern: ' . $e->getMessage());
 
             return back()
                 ->withInput()
-                ->with('error', 'Có lỗi xảy ra trong quá trình xử lý. Vui lòng thử lại.');
+                ->with('error', 'An error occurred while processing. Please try again.');
         }
     }
 
@@ -153,7 +153,7 @@ class InternManagementController extends Controller
             if ($mentor->interns_count >= $mentor->max_interns) {
                 return back()
                     ->withInput()
-                    ->with('error', 'Mentor này đã đạt số lượng intern tối đa.');
+                    ->with('error', 'This mentor has reached the maximum number of interns.');
             }
         }
         DB::beginTransaction();
@@ -165,7 +165,7 @@ class InternManagementController extends Controller
             $user = $intern->user;
 
             if (!$user) {
-                throw new \Exception('Không tìm thấy User');
+                throw new \Exception('User not found.');
             }
 
 
@@ -190,13 +190,13 @@ class InternManagementController extends Controller
             DB::commit();
 
             return redirect('adminpage/intern')
-                ->with('success', 'Cập nhật intern thành công');
+                ->with('success', 'Intern updated successfully.');
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('Lỗi khi cập nhật Intern: ' . $e->getMessage());
+            Log::error('Error while updating Intern: ' . $e->getMessage());
             return back()
                 ->withInput()
-                ->with('error', 'Có lỗi xảy ra trong quá trình xử lý. Vui lòng thử lại.');
+                ->with('error', 'An error occurred while processing. Please try again.');
         }
     }
 

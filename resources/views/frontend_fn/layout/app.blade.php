@@ -89,6 +89,8 @@
     {{-- Frontend JS --}}
     <script src="{{ asset('frontend/js/intern.js') }}"></script>
     <script src="{{ asset('frontend/js/mentor.js') }}"></script>
+    <script src="{{ asset('admin/dist/js/alert.js') }}"></script>
+
     <!-- This page JavaScript -->
     <!-- chartis chart -->
     <script src="{{ asset('admin/assets/libs/chartist/dist/chartist.min.js') }}"></script>
