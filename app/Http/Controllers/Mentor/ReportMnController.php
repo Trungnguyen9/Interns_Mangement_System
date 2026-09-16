@@ -16,7 +16,7 @@ class ReportMnController extends Controller
         $data = Auth::user()->mentorProfile;
         $reports = $data->weeklyReports()->with('intern')->latest('week_start_date');
 
-        $interns = $data->interns()->where('status', 'Đang thực tập')->get();
+        $interns = $data->interns()->where('status', 'Ongoing Interns')->get();
         // Intern_id
         if (request()->filled('intern_id')) {
             $reports = $reports->where('intern_id', request()->intern_id);
@@ -28,7 +28,7 @@ class ReportMnController extends Controller
         }
         $reports = $reports->paginate(4);
 
-        return view('frontend.mentor.reports.reports', compact('reports', 'interns'));
+        return view('frontend_fn.mentor.reports.reports', compact('reports', 'interns'));
     }
 
     /**
@@ -79,7 +79,7 @@ class ReportMnController extends Controller
 
         return redirect()
             ->back()
-            ->with('success', 'Cập nhật báo cáo thành công.');
+            ->with('success', 'Report updated successfully.');
     }
 
     /**

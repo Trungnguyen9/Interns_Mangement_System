@@ -53,33 +53,33 @@ class DashboardController extends Controller
             [
                 'icon' => 'fa-solid fa-list-check',
                 'color' => 'si-primary',
-                'label' => 'Tổng số task chưa làm',
+                'label' => 'Total tasks not yet completed',
                 'value' => $totalTask,
-                'sub' => 'Được giao cho bạn'
+                'sub' => 'Assigned to you'
             ],
 
             [
                 'icon' => 'fa-solid fa-spinner',
                 'color' => 'si-warning',
-                'label' => 'Đang làm',
+                'label' => 'In progress',
                 'value' => $taskDoing,
-                'sub' => 'Trạng thái Doing'
+                'sub' => 'Status: Doing'
             ],
 
             [
                 'icon' => 'fa-solid fa-eye',
                 'color' => 'si-info',
-                'label' => 'Đang chờ review',
+                'label' => 'Pending review',
                 'value' => $taskReview,
-                'sub' => 'Chờ mentor duyệt'
+                'sub' => 'Waiting for mentor approval'
             ],
 
             [
                 'icon' => 'fa-solid fa-circle-check',
                 'color' => 'si-success',
-                'label' => 'Đã hoàn thành',
+                'label' => 'Completed',
                 'value' => $taskDone,
-                'sub' => 'Trạng thái Done'
+                'sub' => 'Status: Done'
             ],
         ];
 

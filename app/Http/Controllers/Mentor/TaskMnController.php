@@ -107,7 +107,7 @@ class TaskMnController extends Controller
 
         if (!$task) {
             return back()->withErrors([
-                'permission' => 'Task này không thuộc quyền quản lý của bạn.'
+                'permission' => 'This task is not under your management.'
             ]);
         }
 

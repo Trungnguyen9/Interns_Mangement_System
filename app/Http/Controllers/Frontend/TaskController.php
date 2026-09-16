@@ -105,7 +105,7 @@ class TaskController extends Controller
         if ($task->status === 'Done') {
             return response()->json([
                 'success' => false,
-                'message' => 'Task đã hoàn thành, chỉ mentor mới có quyền chỉnh sửa.',
+                'message' => 'This task is completed; only the mentor can edit it.',
             ], 403);
         }
 

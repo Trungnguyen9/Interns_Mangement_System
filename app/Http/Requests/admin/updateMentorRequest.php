@@ -14,7 +14,7 @@ class updateMentorRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
-    }
+    } 
 
     /**
      * Get the validation rules that apply to the request.
@@ -47,13 +47,13 @@ class updateMentorRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required'               => 'Vui lòng nhập Tên tài khoản.',
-            'name.unique'                 => 'Tên tài khoản này đã tồn tại.',
-            'email.required'              => 'Vui lòng nhập địa chỉ Email.',
-            'email.email'                 => 'Định dạng Email không hợp lệ.',
-            'email.unique'                => 'Email này đã được đăng ký.',
-            'max_interns.integer'          => 'Số lượng sinh viên thực tập phải là một số nguyên.',
-            'max_interns.min'              => 'Số lượng sinh viên thực tập phải lớn hơn hoặc bằng 1.',
+            'name.required'               => 'Please enter the account name.',
+            'name.unique'                 => 'This account name already exists.',
+            'email.required'              => 'Please enter an email address.',
+            'email.email'                 => 'The email format is invalid.',
+            'email.unique'                => 'This email is already registered.',
+            'max_interns.integer'          => 'The number of interns must be an integer.',
+            'max_interns.min'              => 'The number of interns must be at least 1.',
         ];
     }
 }

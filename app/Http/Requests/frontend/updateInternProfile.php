@@ -36,23 +36,24 @@ class updateInternProfile extends FormRequest
             'academic_year'      => 'nullable|string|max:50',
             'desired_technology' => 'nullable|string|max:255',
             'start_date'         => 'required|date',
-            'end_date'           => 'required|date|after_or_equal:start_date', // Ngày kết thúc phải sau hoặc bằng ngày bắt đầu
+            'end_date'           => 'required|date|after_or_equal:start_date', // The end date must be greater than or equal to the start date.
         ];
     }
     public function messages(): array
     {
         return [
-            'name.required'               => 'Vui lòng nhập Tên tài khoản.',
-            'name.unique'                 => 'Tên tài khoản này đã tồn tại.',
-            'name.max'                    => 'Tên tài khoản không được vượt quá 255 ký tự.',
-            'full_name.required'          => 'Vui lòng nhập họ và tên.',
-            'full_name.max'               => 'Họ và tên không được vượt quá 255',
-            'start_date.required'         => 'Vui lòng chọn Ngày bắt đầu.',
-            'start_date.date'             => 'Ngày bắt đầu không đúng định dạng ngày tháng.',
-            'end_date.required'           => 'Vui lòng chọn Ngày kết thúc.',
-            'end_date.date'               => 'Ngày kết thúc không đúng định dạng ngày tháng.',
-            'end_date.after_or_equal'     => 'Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu.',
-            'mentor_id.exists'            => 'Mentor được chọn không tồn tại trong hệ thống.',
+            'name.required'               => 'Please enter the account name.',
+            'name.unique'                 => 'This account name already exists.',
+            'name.max'                    => 'The account name must not exceed 255 characters.',
+            'full_name.required'          => 'Please enter the full name.',
+            'full_name.max'               => 'The full name must not exceed 255 characters.',
+            'start_date.required'         => 'Please select a start date.',
+            'start_date.date'             => 'The start date is not in a valid date format.',
+            'end_date.required'           => 'Please select an end date.',
+            'end_date.date'               => 'The end date is not in a valid date format.',
+            'end_date.after_or_equal'     => 'The end date must be greater than or equal to the start date.',
+            'mentor_id.exists'            => 'The selected mentor does not exist in the system.',
         ];
     }
 }
+ 
