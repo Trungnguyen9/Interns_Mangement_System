@@ -17,12 +17,11 @@ class TaskMnController extends Controller
     public function index(Request $request)
     {
         $mentor = Auth::user()->mentorProfile;
-        $interns = $mentor->interns->where('status', 'Đang thực tập');
-
-        $tasks = $mentor->tasks()->with('intern')->get();
+        $interns = $mentor->interns->where('status', 'Ongoing Interns');
 
 
-        return view('frontend.mentor.tasks.tasks', compact('tasks', 'interns'));
+
+        return view('frontend_fn.mentor.tasks.tasks', compact('interns'));
     }
 
     /**
@@ -65,7 +64,7 @@ class TaskMnController extends Controller
 
         return redirect()
             ->back()
-            ->with('success', 'Giao task thành công.');
+            ->with('success', 'Task Assigned Successfully.');
     }
 
     /**
@@ -84,7 +83,7 @@ class TaskMnController extends Controller
             ->sortBy('deadline')
             ->groupBy('status');
 
-        return view('frontend.mentor.tasks.show', compact('intern', 'tasksByStatus'));
+        return view('frontend_fn.mentor.tasks.show', compact('intern', 'tasksByStatus'));
     }
 
     /**
@@ -141,7 +140,7 @@ class TaskMnController extends Controller
 
         return redirect()
             ->back()
-            ->with('success', 'Cập nhật task thành công.');
+            ->with('success', 'Task updated successfully.');
     }
 
     /**
