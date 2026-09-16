@@ -51,35 +51,31 @@ class DashboardController extends Controller
 
         $stats = [
             [
-                'icon' => 'fa-solid fa-list-check',
-                'color' => 'si-primary',
-                'label' => 'Total tasks not yet completed',
+                'title' => 'Total Tasks',
                 'value' => $totalTask,
-                'sub' => 'Assigned to you'
+                'icon'  => 'mdi mdi-format-list-bulleted',
+                'color' => 'cyan',
             ],
 
             [
-                'icon' => 'fa-solid fa-spinner',
-                'color' => 'si-warning',
-                'label' => 'In progress',
+                'title' => 'In Progress',
                 'value' => $taskDoing,
-                'sub' => 'Status: Doing'
+                'icon'  => 'mdi mdi-settings',
+                'color' => 'warning',
             ],
 
             [
-                'icon' => 'fa-solid fa-eye',
-                'color' => 'si-info',
-                'label' => 'Pending review',
+                'title' => 'Pending Review',
                 'value' => $taskReview,
-                'sub' => 'Waiting for mentor approval'
+                'icon'  => 'mdi mdi-eye',
+                'color' => 'info',
             ],
 
             [
-                'icon' => 'fa-solid fa-circle-check',
-                'color' => 'si-success',
-                'label' => 'Completed',
+                'title' => 'Completed Tasks',
                 'value' => $taskDone,
-                'sub' => 'Status: Done'
+                'icon'  => 'mdi mdi-check-circle',
+                'color' => 'success',
             ],
         ];
 
@@ -107,7 +103,7 @@ class DashboardController extends Controller
         ];
 
 
-        return view('frontend.intern.dashboard', compact(
+        return view('frontend_fn.intern.dashboard.dashboard', compact(
             'totalTask',
             'taskDoing',
             'taskReview',
