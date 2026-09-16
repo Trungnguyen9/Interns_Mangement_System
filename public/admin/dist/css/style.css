@@ -15418,4 +15418,551 @@ File: scss
 }
 
 
-/* INTERN */
+/* Mentor */
+/* ==========================================================================
+   Intern Task Index – card grid (tasks_index.blade.php)
+   Thêm vào dưới cùng mentor.css — không ảnh hưởng các class cũ.
+   ========================================================================== */
+
+.intern-task-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.intern-task-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06),
+    0 1px 2px rgba(0, 0, 0, .04);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow .15s, border-color .15s;
+}
+
+.intern-task-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .09);
+  border-color: #4a6cf7;
+}
+
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.itc-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.itc-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.itc-name {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itc-sub {
+  font-size: 12px;
+  color: #718096;
+  margin-top: 2px;
+}
+
+
+/* ==========================================================================
+   Progress
+   ========================================================================== */
+
+.itc-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.itc-progress-track {
+  height: 7px;
+  background: #f5f6fa;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.itc-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: #4a6cf7;
+  transition: width .4s ease;
+}
+
+.itc-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #718096;
+}
+
+
+/* ==========================================================================
+   Stats
+   ========================================================================== */
+
+.itc-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #f5f6fa;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.itc-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px;
+  position: relative;
+  border-right: 1px solid #e2e8f0;
+}
+
+.itc-stat:last-child {
+  border-right: none;
+}
+
+.itc-stat-num {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.itc-stat-label {
+  font-size: 10px;
+  color: #718096;
+  margin-top: 3px;
+}
+
+
+/* ==========================================================================
+   Review warning dot
+   ========================================================================== */
+
+.itc-review-dot {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d69e2e;
+}
+
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.itc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.itc-period {
+  font-size: 11px;
+  color: #718096;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.itc-btn {
+  padding: 6px 14px;
+  font-size: 12px;
+}
+
+.itc-danger {
+  background: #fff5f5;
+  color: #e53e3e;
+  border-radius: 15px;
+  padding: 2px 8px;
+}
+
+/* ava */
+
+.mini-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #eef1fe;
+  color: #4a6cf7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.mini-avatar.lg {
+  width: 48px;
+  height: 48px;
+  font-size: 16px;
+}
+
+
+
+
+
+/* ==========================================================================
+   Kanban board (Tasks page)
+   ========================================================================== */
+
+.kanban {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.kcol {
+  background: #f5f6fa;
+  border-radius: 12px;
+  padding: 12px;
+  min-height: 200px;
+}
+
+.kcol-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: #718096;
+  margin-bottom: 10px;
+}
+
+.kcol-count {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 99px;
+  padding: 1px 8px;
+  font-size: 11px;
+}
+
+.kcard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: box-shadow .15s, border-color .15s;
+}
+
+.kcard:hover {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06),
+    0 1px 2px rgba(0, 0, 0, .04);
+  border-color: #4a6cf7;
+}
+
+.kcard-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.kcard-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #718096;
+}
+
+.kcard-intern {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+/* ==========================================================================
+   Status badges specific to task workflow
+   ========================================================================== */
+
+.badge.todo {
+  background: #f7fafc;
+  color: #718096;
+  border: 1px solid #e2e8f0;
+}
+
+.badge.doing {
+  background: #ebf8ff;
+  color: #3182ce;
+}
+
+.badge.review {
+  background: #fffbeb;
+  color: #d69e2e;
+}
+
+.badge.done {
+  background: #f0fff4;
+  color: #38a169;
+}
+
+.badge.pri-high {
+  background: #fbe3e4;
+  color: #fa5838;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.badge.pri-medium {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #fff2d6;
+  color: #ffbc34;
+}
+
+.badge.pri-low {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #e8f5e5;
+  color: #5ac146;
+}
+
+
+/* ==========================================================================
+   Kanban page header (tasks_kanban.blade.php)
+   ========================================================================== */
+
+.kanban-page-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.kanban-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #718096;
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  white-space: nowrap;
+  transition: all .15s;
+}
+
+.kanban-back-btn:hover {
+  background: #f5f6fa;
+  color: #1a202c;
+}
+
+.kanban-intern-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 8px 14px;
+}
+
+.kanban-intern-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.kanban-intern-sub {
+  font-size: 11px;
+  color: #718096;
+}
+
+
+/* ==========================================================================
+   Kanban header stats
+   ========================================================================== */
+
+.kanban-header-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 8px 16px;
+}
+
+.khs-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.khs-num {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.khs-label {
+  font-size: 10px;
+  color: #718096;
+}
+
+.khs-sep {
+  width: 1px;
+  height: 24px;
+  background: #e2e8f0;
+}
+
+
+/* ==========================================================================
+   Review / Done action button states
+   ========================================================================== */
+
+#btnReturnDoing,
+#btnConfirmDone {
+  opacity: .4;
+  pointer-events: none;
+}
+
+#btnReturnDoing.active-action,
+#btnConfirmDone.active-action {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* ==========================================================================
+   Report meta
+   ========================================================================== */
+
+.report-meta {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #8a8a8a;
+}
+
+
+/* ==========================================================================
+   Deadline badges
+   ========================================================================== */
+
+.deadline-badge-2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fff5f5;
+  color: #e53e3e;
+  border-radius: 15px;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
+.near-deadline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fffbeb;
+  color: #d69e2e;
+  border-radius: 15px;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
+/* ==========================================================================
+   Modal overlay for "Giao task mới" (create task) form
+   ========================================================================== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .45);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.task-modal {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 24px;
+  width: 520px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/* Capacity warning banner */
+.capacity-warning {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #fffbeb;
+  border: 1px solid #fbd38d;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #975a16;
+  margin-bottom: 14px;
+}
+
+
+@media (max-width: 768px) {
+  .kanban {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}

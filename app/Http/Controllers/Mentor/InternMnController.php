@@ -37,7 +37,7 @@ class InternMnController extends Controller
 
         $interns = $interns->paginate(5);
 
-        return view('frontend.mentor.interns.index', compact('data', 'interns', 'currentInterns'));
+        return view('frontend_fn.mentor.intern.index', compact('data', 'interns', 'currentInterns'));
     }
 
     /**
@@ -66,7 +66,7 @@ class InternMnController extends Controller
         $tasks = $intern->tasks()->paginate(5);
         $weeklyReports = $intern->weeklyReports()->paginate(5);
 
-        return view('frontend.mentor.interns.detail', compact('intern', 'tasks', 'weeklyReports'));
+        return view('frontend_fn.mentor.intern.show', compact('intern', 'tasks', 'weeklyReports'));
     }
 
     /**

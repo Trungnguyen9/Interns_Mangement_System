@@ -111,7 +111,7 @@
 
 @endsection
 
-@push('styles')
+{{-- @push('styles')
     <style>
         /* ── Intern task grid ── */
         .intern-task-grid {
@@ -278,4 +278,4 @@
             font-weight: 600;
         }
     </style>
-@endpush
+@endpush --}}
