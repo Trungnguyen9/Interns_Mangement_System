@@ -54,7 +54,12 @@
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        @include('frontend_fn.layout.left-sidebar.left-sidebar-mentor')
+        {{-- Left Sidebar --}}
+        @if (auth()->user()->id_role == '2')
+            @include('frontend_fn.layout.left-sidebar.left-sidebar-mentor')
+        @elseif (auth()->user()->id_role == '3')
+            @include('frontend_fn.layout.left-sidebar.left-sidebar-intern')
+        @endif
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
