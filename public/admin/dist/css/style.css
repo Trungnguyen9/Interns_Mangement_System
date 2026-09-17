@@ -5400,6 +5400,33 @@ input[type="button"].btn-block {
   background-color: #6d34d4;
 }
 
+.badge.Todo {
+  background: #f7fafc;
+  color: #181717;
+  border: 1px solid #e2e8f0;
+}
+
+.badge.Doing {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.badge.Review {
+  background: rgb(254, 254, 181);
+  color: rgb(0, 0, 0);
+  border: 1px solid #e2e8f0;
+}
+
+.badge.Done {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.badge.Overdue {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
@@ -5599,6 +5626,12 @@ input[type="button"].btn-block {
 
 .alert-purple .alert-link {
   color: #32224f;
+}
+
+.alert-submit {
+  color: #2f6424;
+  background-color: #def3da;
+  border-color: #d1eecb;
 }
 
 @keyframes progress-bar-stripes {
@@ -15977,4 +16010,90 @@ File: scss
   .detail-grid {
     grid-template-columns: 1fr;
   }
+}
+
+
+/* ===== Modal overlay (nền mờ phủ toàn màn hình) ===== */
+.modal-overlay2 {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-overlay2.hidden {
+  display: none;
+}
+
+/* ===== Khung trắng của modal ===== */
+.modal-box {
+  background: #fff;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 560px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .15);
+}
+
+/* ===== Nút đóng (x) ===== */
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: var(--c-bg);
+  color: var(--c-text-sub);
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s;
+}
+
+.modal-close:hover {
+  background: var(--c-danger-l);
+  color: var(--c-danger);
+}
+
+/* ===== Nội dung chi tiết task bên trong modal ===== */
+.task-detail h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  padding-right: 32px;
+  /* chừa chỗ cho nút đóng, tránh đè chữ */
+}
+
+.task-detail .form-group {
+  margin-bottom: 16px;
+}
+
+.task-detail .form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-text-sub);
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  margin-bottom: 6px;
+}
+
+/* Submit report form toggle */
+.form-section {
+  display: none;
+}
+
+.form-section.open {
+  display: block;
 }

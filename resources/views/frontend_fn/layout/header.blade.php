@@ -9,14 +9,19 @@
             <!-- Logo -->
             <!-- ============================================================== -->
             <div class="navbar-brand">
-                <a href="{{ url('/adminpage') }}" class="logo">
-                    <!-- Logo icon -->
-                    <b class="logo-icon">
-                        <!-- You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                        <img src="{{ asset('img/logo_1.png') }}" alt="homepage" style ="width: 170px"
-                            class="light-logo" />
-                    </b>
-                    <!-- End Logo icon -->
+                @if (Auth::user()->id_role == '1')
+                    <a href="{{ url('/adminpage') }}" class="logo">
+                    @elseif (Auth::user()->id_role == '2')
+                        <a href="{{ url('/mentorpage/dashboard') }}" class="logo">
+                        @elseif (Auth::user()->id_role == '3')
+                            <a href="{{ url('/internpage/dashboard') }}" class="logo">
+                @endif
+                <!-- Logo icon -->
+                <b class="logo-icon">
+                    <!-- You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                    <img src="{{ asset('img/logo_1.png') }}" alt="homepage" style ="width: 170px" class="light-logo" />
+                </b>
+                <!-- End Logo icon -->
                 </a>
             </div>
             <!-- ============================================================== -->
@@ -43,11 +48,11 @@
                 <!-- Search -->
                 <!-- ============================================================== -->
                 <li class="nav-item search-box">
-                        <div class="d-flex align-items-center">
-                            <div class="ml-1 d-none d-sm-block">
-                                <span></span>
-                            </div>
+                    <div class="d-flex align-items-center">
+                        <div class="ml-1 d-none d-sm-block">
+                            <span></span>
                         </div>
+                    </div>
                 </li>
             </ul>
             <!-- ============================================================== -->

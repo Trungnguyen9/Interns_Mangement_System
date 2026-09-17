@@ -1,127 +1,148 @@
-@extends('frontend.intern.layouts.intern')
-
-@section('title', 'Tasks')
-@section('breadcrumb', 'Tasks')
-
+@extends('frontend_fn.layout.app')
 @section('content')
-    <div style="margin-bottom:20px">
-        <div class="page-title">Danh sách Tasks</div>
-        <div class="page-sub">Công việc được mentor giao</div>
-    </div>
-
-    {{-- Mini stats --}}
-    <div class="grid-4">
-        <div class="stat-mini">
-            <div class="stat-mini-icon" style="background:var(--c-primary-l);color:var(--c-primary)"><i
-                    class="fa-solid fa-layer-group"></i></div>
-            <div>
-                <div style="font-size:11px;color:var(--c-text-sub)">Tất cả</div>
-                <div style="font-size:20px;font-weight:700;color:var(--c-primary)">
-                    {{ auth()->user()->internProfile->pending_tasks_count }}</div>
-            </div>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
-        <div class="stat-mini">
-            <div class="stat-mini-icon" style="background:var(--c-info-l);color:var(--c-info)"><i
-                    class="fa-solid fa-spinner"></i></div>
-            <div>
-                <div style="font-size:11px;color:var(--c-text-sub)">Đang làm</div>
-                <div style="font-size:20px;font-weight:700;color:var(--c-info)">
-                    {{ auth()->user()->internProfile->tasks->where('status', 'Doing')->count() }}</div>
+    @endif
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-5 align-self-center">
+                <h4 class="page-title">Tasks List</h4>
             </div>
-        </div>
-        <div class="stat-mini">
-            <div class="stat-mini-icon" style="background:var(--c-success-l);color:var(--c-success)"><i
-                    class="fa-solid fa-circle-check"></i></div>
-            <div>
-                <div style="font-size:11px;color:var(--c-text-sub)">Hoàn thành</div>
-                <div style="font-size:20px;font-weight:700;color:var(--c-success)">
-                    {{ auth()->user()->internProfile->tasks->where('status', 'Done')->count() }}</div>
-            </div>
-        </div>
-        <div class="stat-mini">
-            <div class="stat-mini-icon" style="background:var(--c-danger-l);color:var(--c-danger)"><i
-                    class="fa-solid fa-circle-xmark"></i></div>
-            <div>
-                <div style="font-size:11px;color:var(--c-text-sub)">Quá hạn</div>
-                <div style="font-size:20px;font-weight:700;color:var(--c-danger)">
-                    {{ auth()->user()->internProfile->overdue_tasks_count }}</div>
+            <div class="col-7 align-self-center">
+                <div class="d-flex align-items-center justify-content-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Tasks List</li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
 
-    {{-- Toolbar --}}
-    <form method="get" action="{{ route('frontend.intern.tasks') }}" class="toolbar" style="margin-top:20px">
-        @csrf
-        <input type="text" name="search" class="form-control" placeholder="Tìm task theo tên..."
-            value="{{ request('search') }}">
-        <select name="status" class="form-control" style="width:auto">
-            <option value="">Tất cả trạng thái</option>
-            <option value="Todo" @selected(request('status') === 'Todo')>Chờ thực hiện</option>
-            <option value="Doing" @selected(request('status') === 'Doing')>Đang làm</option>
-            <option value="Review" @selected(request('status') === 'Review')>Chờ duyệt</option>
-            <option value="Done" @selected(request('status') === 'Done')>Hoàn thành</option>
-            <option value="Overdue" @selected(request('status') === 'Overdue')>Quá hạn</option>
-        </select>
-        <select name="priority" class="form-control" style="width:auto">
-            <option value="">Tất cả độ ưu tiên</option>
-            <option value="high" @selected(request('priority') === 'high')>Cao</option>
-            <option value="medium" @selected(request('priority') === 'medium')>Trung bình</option>
-            <option value="low" @selected(request('priority') === 'low')>Thấp</option>
-        </select>
-        <button class="btn btn-primary" type="submit">Search</button>
-    </form>
+    <div class="container-fluid">
+        {{-- ============================================================== --}}
+        {{-- SECTION 1: Tổng quan --}}
+        {{-- ============================================================== --}}
+        <div class="row">
+            @foreach ($stats as $stat)
+                <div class="col-md-6 col-lg mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-2">
+                                        {{ $stat['title'] }}
+                                    </h6>
+                                    <h2 class="font-weight-bold mb-0">
+                                        {{ $stat['value'] }}
+                                    </h2>
+                                </div>
+                                <div class="text-{{ $stat['color'] }}">
+                                    <i class="{{ $stat['icon'] }} display-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
 
-    {{-- Table --}}
-    <div class="tbl-wrap">
-        <table class="tbl">
-            <thead>
-                <tr>
-                    <th>Stt</th>
-                    <th>Tên task</th>
-                    <th>Mô tả</th>
-                    <th>Ngày tạo</th>
-                    <th>Deadline</th>
-                    <th>Độ ưu tiên</th>
-                    <th>Trạng thái</th>
-                    <th>Thao tác</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($tasks as $item)
-                    <tr>
-                        <td style="color:var(--c-text-sub);font-size:12px">
-                            {{ $loop->iteration }}
-                        </td>
-                        <td>
-                            <div class="task-title">{{ $item->title }}</div>
-                        </td>
-                        <td style="max-width:200px">{{ $item->description }}</td>
-                        <td>{{ $item->created_at }}</td>
-                        <td
-                            class="{{ $item->is_overdue ? 'deadline-over' : '' }}
-                                    {{ $item->is_near_deadline ? 'deadline-near' : '' }}">
-                            {{ $item->deadline }} {{ $item->is_overdue ? '⚠' : '' }}
-                        </td>
-                        <td><span class="badge pri-{{ $item->priority }}">{{ $item->priority }}</span></td>
-                        <td><span id="status-badge-{{ $item->id }}"
-                                class="badge {{ $item->status }}">{{ $item->status }}</span></td>
-                        <td>
-                            <button class="btn btn-outline" onclick="showTaskDetail({{ $item->id }})">
-                                <i class="fa-solid fa-eye"></i>
-                                Xem
-                            </button>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    {{-- Bộ lọc --}}
+                    <div class="card-body">
+                        <form method="GET" action="{{ route('frontend.intern.tasks') }}" class="row mb-3">
+                            @csrf
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control col-md-8"
+                                    placeholder="Search by name or email" value="{{ request('search') }}">
+                                <select name="status" class="form-control col-md-2 ">
+                                    <option value="">All Status</option>
+                                    <option value="Todo" @selected(request('status') === 'Todo')>Pending</option>
+                                    <option value="Doing" @selected(request('status') === 'Doing')>Doing</option>
+                                    <option value="Review" @selected(request('status') === 'Review')>Review</option>
+                                    <option value="Done" @selected(request('status') === 'Done')>Done</option>
+                                    <option value="Overdue" @selected(request('status') === 'Overdue')>Overdue</option>
+                                </select>
+                                <select name="priority" class="form-control col-md-2 ">
+                                    <option value="">All Priorities</option>
+                                    <option value="high" @selected(request('priority') === 'high')>High</option>
+                                    <option value="medium" @selected(request('priority') === 'medium')>Medium</option>
+                                    <option value="low" @selected(request('priority') === 'low')>Low</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    {{--  --}}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Task Title</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Created Date</th>
+                                    <th scope="col">Deadline</th>
+                                    <th scope="col">Priority</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($tasks as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->title }}</td>
+                                        <td>{{ $item->description }}</td>
+                                        <td>{{ $item->created_at }}</td>
+                                        <td
+                                            class="{{ $item->is_overdue ? 'deadline-over' : '' }}
+                                                {{ $item->is_near_deadline ? 'deadline-near' : '' }}">
+                                            {{ $item->deadline }} {{ $item->is_overdue ? '⚠' : '' }}
+                                        </td>
+                                        <td><span class="badge pri-{{ $item->priority }}">{{ $item->priority }}</span>
+                                        </td>
+                                        <td><span id="status-badge-{{ $item->id }}"
+                                                class="badge {{ $item->status }}">{{ $item->status }}</span></td>
+                                        <td>
+                                            <button class="btn btn-outline" onclick="showTaskDetail({{ $item->id }})">
+                                                <i class="fa-solid fa-eye"></i>
+                                                Details
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-end">
+                            {{ $tasks->appends(request()->query())->links('pagination::bootstrap-4') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div>{{ $tasks->appends(request()->query())->links('vendor.pagination.ims') }}</div>
-
 
     {{-- Task detail modal --}}
-    <div id="task-detail-modal" class="modal-overlay hidden">
+    <div id="task-detail-modal" class="modal-overlay2 hidden">
         <div class="modal-box">
             <button class="modal-close" onclick="closeTaskDetail()">×</button>
             <div id="task-detail-content">
