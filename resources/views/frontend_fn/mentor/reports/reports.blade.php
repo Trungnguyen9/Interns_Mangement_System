@@ -121,9 +121,10 @@
                                     <small class="text-muted">
                                         Week {{ $report->week_number }}
                                         &middot;
-                                        {{ $report->week_start_date }}
+                                        
+                                        {{ \Carbon\Carbon::parse($report->week_start_date)->format('d/m/Y') }}
                                         –
-                                        {{ $report->week_end_date }}
+                                        {{ \Carbon\Carbon::parse($report->week_end_date)->format('d/m/Y') }}
                                     </small>
                                 </div>
 

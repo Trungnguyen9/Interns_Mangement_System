@@ -16,8 +16,14 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $reports = Auth::user()->internProfile->weeklyReports()->paginate(5);
-        return view('frontend.intern.reports.reports', compact('reports'));
+        $reports = Auth::user()->internProfile->weeklyReports()->latest('week_start_date');
+        // Status
+        if (request()->filled('status')) {
+            $reports = $reports->where('weekly_reports.status', request()->status);
+        }
+        $reports = $reports->paginate(4);
+
+        return view('frontend_fn.intern.reports.reports', compact('reports'));
     }
 
     /**
@@ -93,7 +99,7 @@ class ReportController extends Controller
     {
         $reports = Auth::user()->internProfile->weeklyReports()->findOrFail($id);
 
-        return view("frontend.intern.reports.editReport", compact('reports'));
+        return view("frontend_fn.intern.reports.editReport", compact('reports'));
     }
 
     /**

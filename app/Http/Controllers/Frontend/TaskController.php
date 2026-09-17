@@ -43,8 +43,40 @@ class TaskController extends Controller
 
         $tasks = $tasks->paginate(5);
 
+        $stats = [
+            [
+                'title' => 'Total Tasks',
+                'value' => $intern->tasks()->count(),
+                'icon'  => 'mdi mdi-format-list-bulleted',
+                'color' => 'info',
+            ],
 
-        return view('frontend.intern.tasks.tasks', compact('tasks', 'intern'));
+            [
+                'title' => 'Pending Tasks',
+                'value' => $intern->tasks()->where('status', 'Review')->count(),
+                'icon'  => 'mdi mdi-timer-sand',
+                'color' => 'warning',
+            ],
+
+            [
+                'title' => 'Completed Tasks',
+                'value' => $intern->tasks()->where('status', 'Done')->count(),
+                'icon'  => 'mdi mdi-check-circle-outline',
+                'color' => 'success',
+            ],
+
+            [
+                'title' => 'Overdue Tasks',
+                'value' => $intern->tasks()
+                    ->whereDate('deadline', '<', now())
+                    ->whereNotIn('status', ['Done', 'Review'])
+                    ->count(),
+                'icon'  => 'mdi mdi-alert-circle-outline',
+                'color' => 'danger',
+            ]
+        ];
+
+        return view('frontend_fn.intern.tasks.tasks', compact('tasks', 'intern', 'stats'));
     }
 
     /**
@@ -83,7 +115,7 @@ class TaskController extends Controller
             ->where('id', $id)
             ->firstOrFail();
 
-        return view('frontend.intern.tasks.task-detail', compact('task'))->render();
+        return view('frontend_fn.intern.tasks.task-detail', compact('task'))->render();
     }
 
     /**

@@ -19,7 +19,7 @@ class ProfilesController extends Controller
     {
         $intern = Auth::user()->internProfile()->with(['user', 'mentor.user'])->firstOrFail();
 
-        return view('frontend.intern.profile.profile', compact('intern'));
+        return view('frontend_fn.intern.profile.profile', compact('intern'));
     }
 
     /**
@@ -53,7 +53,7 @@ class ProfilesController extends Controller
     {
         $intern = Auth::user()->internProfile()->with(['user', 'mentor.user'])->firstOrFail();
 
-        return view('frontend.intern.profile.edit', compact('intern'));
+        return view('frontend_fn.intern.profile.edit', compact('intern'));
     }
 
     /**
